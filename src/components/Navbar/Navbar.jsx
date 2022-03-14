@@ -12,7 +12,7 @@ const Navbar = () =>
         <header className="header font-poppins">
             <div className="flex items-center">
                 <div className="mr-4 lg:mr-16 h-10 md:h-14">
-                    <Link to={path.home}>
+                    <Link to={navPath[0].route}>
                         <img
                             className="h-full"
                             src="https://konsept.qodeinteractive.com/wp-content/uploads/2020/07/logo_mainpng.png"
