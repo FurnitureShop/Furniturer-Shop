@@ -8,7 +8,7 @@ const path = {
         route: "/products"
     },
     aboutus: {
-        label: "Abouts",
+        label: "About Us",
         route: "/aboutus"
     }
 };

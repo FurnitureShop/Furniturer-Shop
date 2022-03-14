@@ -1,0 +1,22 @@
+.header {
+    background-color: #fff;
+    padding: 15px;
+
+    &__nav {
+        & > ul > li {
+            margin: 15px;
+            &:first-child {
+                margin-left: 0;
+            }
+            &:last-child {
+                margin-right: 0;
+            }
+            & > a {
+                text-transform: capitalize;
+                padding-bottom: 3px;
+                
+            }
+            
+        }
+    }
+}
