@@ -1,10 +1,16 @@
 import './App.less';
-import {Button} from 'antd'
+import React from 'react';
+import Navbar from './components/Navbar/Navbar.jsx';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './Paths/Routes';
 
 function App() {
   return (
-    <div className="App">
-      <Button>aBC</Button>
+    <div>
+      <BrowserRouter>
+        <Navbar />
+        <Routes />
+      </BrowserRouter>
     </div>
   );
 }
