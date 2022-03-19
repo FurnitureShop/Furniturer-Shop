@@ -1,6 +1,8 @@
 .header {
     background-color: #fff;
     padding: 15px;
+    transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out,
+      background-color 0.3s ease;
 
     &__nav {
         & > ul > li {
@@ -14,9 +16,117 @@
             & > a {
                 text-transform: capitalize;
                 padding-bottom: 3px;
-                
+            
             }
             
         }
     }
+
+    &__widgets-holder {
+        display: flex;
+        align-items: center;
+    }
+    &__widget {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        &-button {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        &-content {
+            display: flex;
+            align-items: center;
+        }
+        &-burger {
+            & svg path:nth-child(1) {
+                stroke-dashoffset: 240%;
+                stroke-dasharray: 273% 3;
+             }
+             & svg path:nth-child(2) {
+                stroke-dashoffset: 240%;
+                stroke-dasharray: 324% 3;
+             }
+       
+             &:hover svg path:nth-child(1) {
+                -webkit-animation: header-burger-line-1-hover 0.8s cubic-bezier(0, 0, 0.34, 0.79) forwards;
+                animation: header-burger-line-1-hover 0.8s cubic-bezier(0, 0, 0.34, 0.79) forwards;
+             }
+             &:hover svg path:nth-child(2) {
+                -webkit-animation: header-burger-line-2-hover 0.8s cubic-bezier(0, 0, 0.34, 0.79) forwards;
+                animation: header-burger-line-2-hover 0.8s cubic-bezier(0, 0, 0.34, 0.79) forwards;
+             }
+        }
+    }
 }
+
+@-webkit-keyframes header-burger-line-1-hover {
+    0% {
+       stroke-dashoffset: 240%;
+    }
+    50% {
+       stroke-dashoffset: 290%;
+    }
+    51% {
+       stroke-dashoffset: 125%;
+    }
+    90% {
+       stroke-dashoffset: 240%;
+    }
+    100% {
+       stroke-dashoffset: 240%;
+    }
+ }
+ @keyframes header-burger-line-1-hover {
+    0% {
+       stroke-dashoffset: 240%;
+    }
+    50% {
+       stroke-dashoffset: 290%;
+    }
+    51% {
+       stroke-dashoffset: 125%;
+    }
+    90% {
+       stroke-dashoffset: 240%;
+    }
+    100% {
+       stroke-dashoffset: 240%;
+    }
+ }
+ @-webkit-keyframes header-burger-line-2-hover {
+    0% {
+       stroke-dashoffset: 240%;
+    }
+    50% {
+       stroke-dashoffset: 200%;
+    }
+    51% {
+       stroke-dashoffset: 320%;
+    }
+    90% {
+       stroke-dashoffset: 240%;
+    }
+    100% {
+       stroke-dashoffset: 240%;
+    }
+ }
+ @keyframes header-burger-line-2-hover {
+    0% {
+       stroke-dashoffset: 240%;
+    }
+    50% {
+       stroke-dashoffset: 200%;
+    }
+    51% {
+       stroke-dashoffset: 320%;
+    }
+    90% {
+       stroke-dashoffset: 240%;
+    }
+    100% {
+       stroke-dashoffset: 240%;
+    }
+ }

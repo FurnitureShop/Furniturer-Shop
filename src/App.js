@@ -7,12 +7,10 @@ import "./App.scss"
 
 function App() {
   return (
-    <div>
-      <BrowserRouter>
-        <Navbar />
-        <Routes />
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <Routes />
+    </BrowserRouter>
   );
 }
 
