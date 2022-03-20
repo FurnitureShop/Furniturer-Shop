@@ -1,0 +1,101 @@
+@use "../../../../SCSS/" as *;
+
+.heroslider {
+    max-height: 545px;
+    max-width: 100%;
+    margin-bottom: 3rem;
+
+    &-container{
+        padding: 6rem 0;
+        height: 545px;
+
+        &__item {
+            @include flex(center, center);
+            // display: flex;
+            // justify-content: center;
+            // align-items: center;
+
+            &__content {
+                margin-right: 2rem;
+
+                & .type {
+                    font-size: 5rem;
+                    font-weight: 400;
+                    line-height: 80px;
+                    color: #ef5b47;
+
+                    opacity: 0;
+                    transform: translateY(50px);
+                    transition: all 0.4s ease;
+                }
+
+                & .title {
+                    font-size: 3.5rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5rem;
+                    line-height: 56px;
+                    
+                    opacity: 0;
+                    transform: translateY(50px);
+                    transition: all 0.4s ease 0.2s;
+                }
+
+                & .description {
+                    margin-top: 0.7rem;
+
+                    opacity: 0;
+                    transform: translateY(50px);
+                    transition: all 0.4s ease 0.4s;
+                }
+
+                & .readmore {
+                    margin-top: 1.5rem;
+
+                    opacity: 0;
+                    transform: translateY(50px);
+                    transition: all 0.4s ease 0.6s;
+
+                    & > button {
+                        background-color: transparent;
+                        font-family: 'EB Garamond';
+                        font-size: 18px;
+                        font-weight: 400;
+                        font-style: italic;
+                        color: inherit;
+                        border-color: inherit;
+                        border-radius: 4px;
+                        padding: 15px 45px;
+                        height: fit-content;
+                        width: fit-content;
+
+                        &:hover {
+                            background-color: rgba(173, 173, 173, 0.295);
+                        }
+                    }
+                }
+            }
+
+            &__thumbnail {
+                opacity: 0;
+                transform: scale(0.5);
+                transition: all 0.4s ease;
+
+                @include tablet {
+                    display: none;
+                }
+            }
+        }
+
+        &.active &__item__content {
+            .type, .title, .description, .readmore {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        &.active &__item__thumbnail {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+}
