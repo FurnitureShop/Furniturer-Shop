@@ -1,0 +1,37 @@
+.footer {
+    background-color: #f4f2f2;
+    padding: 50px 0 30px;
+
+    &__content {
+
+        &-icon {
+            border: 1px solid rgb(139,139,139);
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        &-headline {
+            font-family: 'Poppins';
+            font-weight: bold;
+            font-size: 1.125rem;
+            line-height: 1.25rem;
+            letter-spacing: 0.025rem;
+            text-transform: uppercase;
+
+            margin-bottom: 0.25rem;
+        }
+
+        & ul > li > a {
+            font-size: 1rem;
+            line-height: 1.35rem;
+            --tw-text-opacity: 1;
+            color: rgba(139, 139, 139, var(--tw-text-opacity));
+
+            &:hover {
+                color: rgba(0, 0, 0, 0.9);
+            }
+        }
+
+    }
+}

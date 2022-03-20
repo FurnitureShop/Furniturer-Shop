@@ -28,6 +28,8 @@ img {
     text-decoration: none;
     cursor: pointer;
     transition: $transition--common;
+    color: inherit;
+
     &:hover {
        color: rgba(0, 0, 0, 0.87);
     }
@@ -45,7 +47,7 @@ img {
    font-weight: 400;
 }
 .furniturer-container {
-   max-width: 1410px;
+   max-width: 1310px;
    padding: 0 20px;
    margin: 0 auto;
 }
