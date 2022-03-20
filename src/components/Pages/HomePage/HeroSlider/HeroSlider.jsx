@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import './HeroSlider.scss'
 import { Button } from "antd";
-
 import { Carousel } from "antd";
 
 const sliderItem = [
@@ -44,7 +43,7 @@ const HeroSlider = () => {
     const [active, setActive] = useState(true);
 
     const carouselSetting = {
-        
+        autoplay: true,
         useTransform: true,
         useCSS: true,
         fade: true,
@@ -57,7 +56,7 @@ const HeroSlider = () => {
         <section className="heroslider font-poppins">
             <Carousel
                 {...carouselSetting}>
-                {sliderItem.map((x) => <HeroSliderItem item={x} isActive={active}/>)}
+                {sliderItem.map((x, index) => <HeroSliderItem item={x} isActive={active} key={index}/>)}
             </Carousel>
         </section>
     )
@@ -72,10 +71,9 @@ const HeroSliderItem = (props) => {
                     <h2 className="title">{props.item.title}</h2>
                     <div className="description">{props.item.description}</div>
                     <div className="readmore">
-                        <Button
-                            size="large">
+                        <a>
                             <span>Read more</span>
-                        </Button>
+                        </a>
                     </div>
                 </div>
                 <div className="heroslider-container__item__thumbnail">
