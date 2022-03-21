@@ -1,0 +1,16 @@
+.coverimages-container {
+    margin-left: 5px;
+    margin-right: 5px;
+
+    & .coverimages-list {
+        &__item {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+        
+    }
+}
