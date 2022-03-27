@@ -1,0 +1,44 @@
+@use "../../../../SCSS/" as *;
+
+.services {
+
+    &-container {
+        padding: 30px 20px !important;
+        align-self: center;
+    }
+
+    &-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        
+        &__icon {
+            margin-right: 10px;
+
+            &--img {
+                height: 50px;
+            }
+        }
+
+        &__content {
+
+            h4 {
+                font-family: "Josefin Sans", sans-serif;
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 22px;
+                letter-spacing: 0.07rem;
+            }
+
+            a {
+                font-family: 'EB Garamond', serif;
+                font-weight: 400;
+                font-size: 17px;
+                line-height: 17px;
+                font-style: italic;
+                text-decoration: underline;
+            }
+        }
+    }
+}
