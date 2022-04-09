@@ -8,7 +8,6 @@ import LastestItems from "./LastestItems/LastestItems";
 const Home = () => {
     return (
         <div>
-            <h1>This is a home page</h1>
             <HeroSlider />
             <LastestItems />
             <OurServices />
