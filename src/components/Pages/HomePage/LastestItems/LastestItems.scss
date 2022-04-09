@@ -1,7 +1,11 @@
 .lastestitems {
 
+    margin-top: 800px !important; 
+    margin-bottom: 100px !important;
+
     &__header {
        text-align: center;
+       margin-bottom: 35px;
 
         & p {
             font-family: 'EB Garamond', serif;

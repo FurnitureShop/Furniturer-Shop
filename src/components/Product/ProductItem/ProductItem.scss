@@ -1,0 +1,83 @@
+@use "../../../SCSS/" as *;
+.product {
+
+    &__thumbnail {
+        position: relative;
+        cursor: pointer;
+
+        &-image {
+            position: relative;
+
+        }
+
+        &-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            background-color: #f7f8f9f3;
+            transition: $transition--common;
+
+            &-addcart {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+
+                transform: translate(-50%,-50%);
+                opacity: 0;
+                transition: $transition--common;
+
+                & a {
+                    font-size: 21px;
+                }
+            }
+        }
+
+        &:hover &-overlay,
+        &:hover &-overlay-addcart {
+            opacity: 1;
+        }
+    }
+
+    &__content {
+        margin-top: 12px;
+
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        
+        &__info {
+            width: 100%;
+
+            &-name {
+                font-family: 'Josefin Sans', sans-serif;
+                font-weight: 600;
+                font-size: 19px;
+                line-height: 20px;
+                letter-spacing: 0.06rem;
+                text-transform: uppercase;
+                color: rgba(0, 0, 0, 0.87);
+            }
+
+            &-category {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 16px;
+                line-height: 1rem;
+                color: #8b8b8b;
+            }
+        }
+
+        &__price {  
+            align-self: center;
+
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 20px;
+            margin-right: 5px;
+        }
+    }
+}
