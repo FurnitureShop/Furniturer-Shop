@@ -1,25 +1,21 @@
 import React from "react";
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import path from "./Path";
 
 import Home from "../components/Pages/HomePage/Home";
 import Products from "../components/Pages/ProductPage/Products";
 import Aboutus from "../components/Pages/AboutusPage/Aboutus";
+import User from "../components/Pages/UserPage/Page/User";
 
-const Routes = () => {
+const RoutePaths = () => {
     return (
-        <Switch>
-            <Route path={path.home.route} exact>
-                <Home />
-            </Route>
-            <Route path={path.products.route} exact>
-                <Products />
-            </Route>
-            <Route path={path.aboutus.route} exact>
-                <Aboutus />
-            </Route>
-        </Switch>
+        <Routes>
+            <Route path={path.home.route} element={<Home />} exact />
+            <Route path={path.products.route} element={<Products />} exact/>
+            <Route path={path.aboutus.route} element={<Aboutus />} exact/>
+            <Route path={path.user.route} element={<User />} />
+        </Routes>
     );
 }
 
-export default Routes;
+export default RoutePaths;

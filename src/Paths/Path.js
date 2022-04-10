@@ -10,6 +10,10 @@ const path = {
     aboutus: {
         label: "About Us",
         route: "/aboutus"
+    },
+    user: {
+        label: "User",
+        route: "/user"
     }
 };
 
