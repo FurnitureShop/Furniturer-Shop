@@ -1,0 +1,50 @@
+.filter-by-sort {
+    & h4 {
+        font-family: "josefin sans", sans-serif;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 17px;
+        line-height: 1.5rem;
+        letter-spacing: .07rem;
+    }
+
+    &_content {
+        position: relative;
+
+        &::before {
+            border-bottom: 1px solid rgba($color: #000000, $alpha: 0.42);
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            content: "";
+            transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        }
+
+        &:hover::before {
+            border-bottom: 2px solid rgba(0, 0, 0, 0.87);
+        }
+
+        &::after {
+            border-bottom: 2px solid rgba($color: #000000, $alpha: 1);
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            content: "";
+            transform: scaleX(0);
+            transition: transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+        }
+
+        &:focus-within::after {
+            transform: scaleX(1);
+        }
+
+        & div {
+            font-size: 16px;
+            font-family: Poppins, sans-serif;
+            font-weight: 400;
+            line-height: 1.4375rem;
+        }
+    }
+}
