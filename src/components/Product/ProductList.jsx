@@ -3,9 +3,13 @@ import React from 'react'
 import ProductItem from './ProductItem/ProductItem';
 //import { Row, Col } from 'antd';
 
-const ProductList = () => {
+const ProductList = (props) => {
+
+
     return (
-        <div className="productlist grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+        <div className={`productlist grid grid-cols-1 
+                            ${props.sm} ${props.lg} ${props.xl}
+                            gap-x-6 gap-y-12`}>
             <ProductItem />
             
             <ProductItem />

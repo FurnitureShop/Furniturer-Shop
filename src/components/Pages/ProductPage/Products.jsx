@@ -8,12 +8,15 @@ const Products = () => {
     return (
         <div>
             <main className="products furniturer-container">
-                <section>
+                <section className="products__filters">
                     <FilterPanel />
                 </section>
 
-                <div>
-                    <ProductList />
+                <div className="products__productslist">
+                    <ProductList
+                        sm={"sm:grid-cols-2"}
+                        lg={""}
+                        xl={"xl:grid-cols-3"} />
                 </div>
             </main>
         </div>

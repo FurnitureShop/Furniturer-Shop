@@ -11,7 +11,10 @@ const LastestItems = () => {
                 <h2>Essential Items</h2>
             </div>
             <div className="lastestitems__product">
-                <ProductList />
+                <ProductList
+                    sm={"sm:grid-cols-2"}
+                    lg={"lg:grid-cols-3"}
+                    xl={""} />
             </div>
         </section>
     )
