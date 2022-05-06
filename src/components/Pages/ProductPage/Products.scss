@@ -5,8 +5,48 @@
     grid-template-columns: 1fr 3fr;
     grid-template-areas: "filter products products products";
 
-    &__filters {
+    &--filters {
         margin-right: 30px;
+    }
+
+    &--lists {
+
+        &__pagination {
+            display: flex;
+            justify-content: center;
+
+            margin: 20px 0px;
+
+            & button.ant-pagination-item-link {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+
+                border: none;
+
+                
+            }
+
+            & li.ant-pagination-item {
+                border: none;
+                border-radius: 90px;           
+                font-family: Poppins, sans-serif;
+                font-weight: 400;
+                font-size: 0.875rem;
+
+                &-active {
+                    background-color: rgba(0, 0, 0, 0.1);
+
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0.12);
+                    }
+                }
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.06);
+                }
+            }
+        }
     }
 }
 
