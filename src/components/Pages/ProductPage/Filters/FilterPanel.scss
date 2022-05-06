@@ -1,1 +1,12 @@
 
+.filter-panel {
+
+    &__btn {
+        height: fit-content !important;
+        font-family: 'EB Garamond';
+        font-size: 18px;
+        font-weight: 400;
+        font-style: italic;
+        border-radius: 5px;
+    }
+}

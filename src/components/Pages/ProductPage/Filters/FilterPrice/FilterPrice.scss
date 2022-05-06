@@ -1,0 +1,48 @@
+@use "../../../../../SCSS/" as *;
+
+.filter-by-price {
+
+    & h4 {
+        font-family: "josefin sans", sans-serif;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 17px;
+        line-height: 1.5rem;
+        letter-spacing: .07rem;
+    }
+
+    &__slider {
+
+        div.ant-slider-horizontal {
+            margin: 6px 4px;    
+        }
+        div.ant-slider-handle {
+            &:focus {
+                box-shadow: none;
+            }
+            &:hover, 
+            &:active {
+                box-shadow: 0px 0px 0px 8px rgba($color--text, 0.16);
+            }
+        }
+    }
+    
+    &__display {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        & span {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+        }
+
+        & button {
+            font-family: 'josefin sans', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 1.4em;
+            letter-spacing: 0.05em;
+        }
+    }
+}
