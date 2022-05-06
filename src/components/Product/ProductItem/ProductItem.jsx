@@ -1,10 +1,18 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import "./ProductItem.scss"
 
 const ProductItem = () => {
+
+    const navigate = useNavigate();
+    const handleNavigation = () => {
+        navigate(`/products/random`)
+    }
+
     return (
         <div className='product'>
-            <div className='product__thumbnail'>
+            <div className='product__thumbnail'
+                onClick={handleNavigation}>
                 <img
                     className="product__thumbnail-image"
                     src='https://konsept.qodeinteractive.com/wp-content/uploads/2020/04/shoplist6.jpg'
