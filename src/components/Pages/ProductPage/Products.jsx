@@ -4,8 +4,6 @@ import "./Products.scss"
 import FilterPanel from "./Filters/FilterPanel";
 import ProductList from "../../Product/ProductList";
 import { Pagination } from "antd";
-import { Outlet, Route, Routes } from "react-router-dom";
-import ProductDetail from "../ProductDetailPage/ProductDetail";
 
 const Products = () => {
 
