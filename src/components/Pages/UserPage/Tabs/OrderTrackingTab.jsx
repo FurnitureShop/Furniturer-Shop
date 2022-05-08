@@ -1,6 +1,6 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { Grid, Col, Form, Input, Row, Space, Button, Spin, List } from "antd";
-import FloatLabel from "components/FloatLabel/FloatLabel";
+import FloatLabel from "components/Controls/FloatLabel/FloatLabel";
 import { useEffect, useState } from "react";
 
 export default function OrderTrackingTab() {
