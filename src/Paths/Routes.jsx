@@ -8,6 +8,7 @@ import Aboutus from "../components/Pages/AboutusPage/Aboutus";
 import User from "../components/Pages/UserPage/Page/User";
 import ProductDetail from "components/Pages/ProductDetailPage/ProductDetail";
 
+
 const RoutePaths = () => {
     return (
         <Routes>
