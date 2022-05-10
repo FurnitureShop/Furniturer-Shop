@@ -6,7 +6,6 @@ const ProductDetail = () => {
     
     return (
         <div className="furniturer-container">
-            <h1>This is a product detail page</h1>
             <div>
                 <ProductDetailHolder />
             </div>

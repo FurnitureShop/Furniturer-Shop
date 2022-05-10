@@ -17,6 +17,7 @@ const QuantityControl = ({ name, control}) => {
             <input
                 className="quantity--input"
                 inputMode="numeric"
+                value={1}
                 />
 
             <span className="quantity__plus">
