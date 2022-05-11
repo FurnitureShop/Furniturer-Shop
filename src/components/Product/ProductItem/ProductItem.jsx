@@ -2,11 +2,11 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import "./ProductItem.scss"
 
-const ProductItem = () => {
+const ProductItem = ({ id }) => {
 
     const navigate = useNavigate();
     const handleNavigation = () => {
-        navigate(`/products/random`)
+        navigate(`/products/${id}`)
     }
 
     return (
