@@ -7,6 +7,7 @@ import Products from "../components/Pages/ProductPage/Products";
 import Aboutus from "../components/Pages/AboutusPage/Aboutus";
 import User from "../components/Pages/UserPage/Page/User";
 import ProductDetail from "components/Pages/ProductDetailPage/ProductDetail";
+import Cart from "components/Pages/CartPage/Cart";
 
 
 const RoutePaths = () => {
@@ -17,6 +18,7 @@ const RoutePaths = () => {
             <Route path="/products/:id" element={<ProductDetail />} exact/>
             <Route path={path.aboutus.route} element={<Aboutus />} exact/>
             <Route path={path.user.route} element={<User />} />
+            <Route path={path.cart.route} element={<Cart />} />
         </Routes>
     );
 }
