@@ -19,7 +19,7 @@ const Cart = () => {
                 </div>
             </div>
 
-            <div>
+            <div className="furniturer-container">
                 <CartList />
             </div>
         </section>

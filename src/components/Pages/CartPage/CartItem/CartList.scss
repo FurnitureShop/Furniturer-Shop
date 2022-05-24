@@ -1,0 +1,44 @@
+.cart {
+    margin-bottom: 100px;
+
+    &--list {
+
+        thead.ant-table-thead {
+            th.ant-table-cell {
+                font-family: Poppins, sans-serif;
+                font-weight: 500;
+                font-size: 0.875rem;
+                line-height: 1.5rem;
+            }
+        }
+
+        tr.ant-table-row-selected td.ant-table-cell {
+            background-color: transparent !important;
+        }
+
+        &__row {
+            td.ant-table-cell {
+                vertical-align: middle;
+            }
+        }
+
+        &__thumbnail {
+            height: 100%;
+            max-height: 150px;
+        }
+
+        &__name {
+            font-family: Poppins, sans-serif;
+            font-weight: 500;
+            font-size: 1.25rem;
+            line-height: 1.6;
+        }
+
+        &__quantity {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+    }
+
+}
