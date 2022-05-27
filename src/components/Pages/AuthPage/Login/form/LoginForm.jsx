@@ -2,16 +2,22 @@ import { Button, Form, Input } from "antd";
 import { ENP_LOGIN } from "api/EndPoint";
 import FloatLabel from "components/Controls/FloatLabel/FloatLabel";
 import { axios } from "lib/axios/Interceptor";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import LocalStorageService from "services/LocalStorage";
+import { login, selectLoading, selectUser } from "store/userSlice";
 import "./LoginForm.scss"
 
 export default function LoginForm() {
-    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
+    const dispatch = useDispatch();
+
     const [form] = Form.useForm();
+
+    const user = useSelector(selectUser);
+    const isLoading = useSelector(selectLoading)
 
     const onEmailChangeHandler = (value) => {
         form.setFieldsValue({ email: value });
@@ -20,19 +26,18 @@ export default function LoginForm() {
     const onPasswordChangeHandler = (value) => {
         form.setFieldsValue({ password: value });
     }
+
+    //Login success -> go back to previous page
+    useEffect(() => {
+        if (user) {
+            navigate(-1);
+        }
+    }, [user])
+
     const onFinish = (values) => {
-        setIsLoading(true);
-        axios.post(ENP_LOGIN, values)
-            .then(({ data: { accessToken, refreshToken } }) => {
-                LocalStorageService.setAuthToken(accessToken);
-                LocalStorageService.setRefreshToken(refreshToken);
-                setTimeout(
-                    () => {
-                        navigate(-1);
-                        setIsLoading(false);
-                    }, 1000)
-            })
+        dispatch(login(values));
     };
+
 
     return (
         <Form
@@ -76,12 +81,13 @@ export default function LoginForm() {
             </Form.Item>
             <p className="sign-up text-left ml-5">
                 Don&lsquo;t have an account?
-                <a
+                <Link
+                    to="/"
                     className="text--success"
                 >
                     {' '}
                     Sign up
-                </a>
+                </Link>
             </p>
             <Form.Item>
                 <Button className="w-full" type="primary" size="large"

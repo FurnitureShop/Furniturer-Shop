@@ -10,6 +10,7 @@ import ProductDetail from "components/Pages/ProductDetailPage/ProductDetail";
 import { AuthLayout } from "components/Pages/AuthPage/AuthLayout";
 import MainLayout from "components/MainLayout";
 import Cart from "components/Pages/CartPage/Cart";
+import LoginTab from "components/Pages/AuthPage/Login/LoginTab";
 
 
 const RoutePaths = () => {
@@ -31,7 +32,12 @@ const RoutePaths = () => {
                     <ProductDetail />
                 </MainLayout>
             } exact />
-            <Route path={path.aboutus.route} element={<AuthLayout />} exact />
+            <Route path={path.aboutus.route} element={<Aboutus />} exact />
+            <Route path={path.login.route} element={
+                <AuthLayout>
+                    <LoginTab />
+                </AuthLayout>
+            } exact />
             <Route path={path.user.route} element={
                 <MainLayout>
                     <User />

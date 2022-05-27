@@ -20,7 +20,7 @@ const LocalStorageService = (() => {
     return _getToken("auth");
   }
   function getRefreshToken(value) {
-    return _getToken("auth");
+    return _getToken("refresh");
   }
 
   function clearToken(name) {
