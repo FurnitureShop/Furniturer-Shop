@@ -1,0 +1,17 @@
+.register_form {
+    & .ant-form-item {
+        justify-content: center;
+        margin: 16px 0px 8px;
+
+        & .ant-btn-lg {
+            border-radius: 10px;
+            padding: 16px 0px;
+            line-height: 1.75;
+            height: auto;
+        }
+    }
+
+    & a {
+        color: #47c269;
+    }
+}

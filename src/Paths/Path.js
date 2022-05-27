@@ -27,6 +27,11 @@ const path = {
     login: {
         label: "Login",
         route: "/login"
+    },
+
+    register: {
+        label: "Register",
+        route: "/register"
     }
 };
 

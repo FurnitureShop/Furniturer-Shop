@@ -1,5 +1,6 @@
 import { Button, Form, Input } from "antd";
-import { ENP_LOGIN } from "api/EndPoint";
+import { ENP_LOGIN, ENP_REGISTER } from "api/EndPoint";
+import { data } from "autoprefixer";
 import FloatLabel from "components/Controls/FloatLabel/FloatLabel";
 import { axios } from "lib/axios/Interceptor";
 import React, { useEffect, useState } from "react";
@@ -7,9 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LocalStorageService from "services/LocalStorage";
 import { login, selectLoading, selectUser } from "store/userSlice";
-import "./LoginForm.scss"
+import "./RegisterForm.scss"
 
-export default function LoginForm() {
+export default function RegisterForm() {
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
@@ -27,6 +28,12 @@ export default function LoginForm() {
         form.setFieldsValue({ password: value });
     }
 
+    const onConfirmPasswordChangeHandler = (value) => {
+
+        form.setFieldsValue({ confirmPassword: value });
+        console.log(form.getFieldValue("confirmPassword"))
+    }
+
     //Login success -> go back to previous page
     useEffect(() => {
         if (user) {
@@ -34,18 +41,24 @@ export default function LoginForm() {
         }
     }, [user])
 
-    const onFinish = (values) => {
-        dispatch(login(values));
+    const onFinish = async (values) => {
+        if (values.password === values.confirmPassword) {
+            axios.post(ENP_REGISTER,
+                { email: values.email, password: values.password })
+                .then((data) => {
+                    dispatch(login({ email: values.email, password: values.password }));
+                })
+        }
     };
 
 
     return (
         <Form
             form={form}
-            className="login_form"
-            name="login_form"
+            className="register_form"
+            name="register_form"
             wrapperCol={{ span: 22 }}
-            initialValues={{ email: "", password: "" }}
+            initialValues={{ email: "", password: "", confirmPassword: "" }}
             onFinish={onFinish}
             // onFinishFailed={onFinishFailed}
             autoComplete="off"
@@ -79,20 +92,35 @@ export default function LoginForm() {
                     <Input type="password" size="large" onChange={(e) => onPasswordChangeHandler(e.target.value)} />
                 </FloatLabel>
             </Form.Item>
+            <Form.Item
+                name="confirmPassword"
+                rules={[{
+                    required: true,
+                    message: 'Please input your confirm password!',
+                    type: "string",
+                    min: 4,
+                }]}
+                shouldUpdate={(prevValues, curValues) =>
+                    curValues.confirmPassword.length === 0 || curValues.confirmPassword.length === 1
+                }>
+                <FloatLabel label="Confirm Password" value={form.getFieldValue("confirmPassword")}>
+                    <Input type="password" size="large" onChange={(e) => onConfirmPasswordChangeHandler(e.target.value)} />
+                </FloatLabel>
+            </Form.Item>
             <p className="sign-up text-left ml-5">
-                Don&lsquo;t have an account?
+                Already have an account?
                 <Link
-                    to="/register"
+                    to="/login"
                     className="text--success"
                 >
                     {' '}
-                    Sign up
+                    Log in
                 </Link>
             </p>
             <Form.Item>
                 <Button className="w-full" type="primary" size="large"
                     loading={isLoading} htmlType="submit">
-                    Log In
+                    Sign up
                 </Button>
             </Form.Item>
         </Form>

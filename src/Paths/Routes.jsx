@@ -11,6 +11,7 @@ import { AuthLayout } from "components/Pages/AuthPage/AuthLayout";
 import MainLayout from "components/MainLayout";
 import Cart from "components/Pages/CartPage/Cart";
 import LoginTab from "components/Pages/AuthPage/Login/LoginTab";
+import RegisterTab from "components/Pages/AuthPage/Register/RegisterTab";
 
 
 const RoutePaths = () => {
@@ -36,6 +37,11 @@ const RoutePaths = () => {
             <Route path={path.login.route} element={
                 <AuthLayout>
                     <LoginTab />
+                </AuthLayout>
+            } exact />
+            <Route path={path.register.route} element={
+                <AuthLayout>
+                    <RegisterTab />
                 </AuthLayout>
             } exact />
             <Route path={path.user.route} element={
