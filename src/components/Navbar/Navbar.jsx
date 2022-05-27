@@ -2,7 +2,7 @@ import { Button, Drawer, Tooltip } from "antd";
 import Icon from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import path from "../../Paths/Path";
+import path from "../../paths/Path";
 import "./Navbar.scss";
 
 import IconBurger from "../../assets/icons/IconBurger";
@@ -25,7 +25,7 @@ const Navbar = () => {
     useEffect(() => {
         window.addEventListener("scroll", () => {
             setHeaderSticky(window.pageYOffset > 0)
-            setHeaderShrink(window.pageYOffset>300)
+            setHeaderShrink(window.pageYOffset > 300)
         })
 
         return false;
@@ -68,11 +68,9 @@ const Navbar = () => {
                                         type="text"
                                         size="large">
                                         <Icon component={userIcon} />
-
                                     </Button>
                                 </Link>
                             </Tooltip>
-
                         </div>
                     </div>
 
