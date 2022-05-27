@@ -9,7 +9,22 @@ import IconBurger from "../../assets/icons/IconBurger";
 import IconUser from "../../assets/icons/IconUser";
 import IconCart from "../../assets/icons/IconCart";
 
-let { user, ...navPath } = path;
+let { user, cart } = path;
+
+let navPath = {
+    home: {
+        label: "Home",
+        route: "/"
+    },
+    products: {
+        label: "Products",
+        route: "/products"
+    },
+    aboutus: {
+        label: "About Us",
+        route: "/aboutus"
+    },
+}
 
 const burgerIcon = (props) => <Icon component={IconBurger} {...props} />
 const userIcon = (props) => <Icon component={IconUser} {...props} />
@@ -77,13 +92,15 @@ const Navbar = () => {
                     <div className="header__widget h-full">
                         <div className="header__widget-content">
                             <Tooltip title="Cart">
-                                <Button
-                                    className="header__widget-button"
-                                    type="text"
-                                    size="large">
-                                    <Icon component={cartIcon} />
-                                    <span>0</span>
-                                </Button>
+                                <Link to={cart.route}>
+                                    <Button
+                                        className="header__widget-button"
+                                        type="text"
+                                        size="large">
+                                        <Icon component={cartIcon} />
+                                        <span>0</span>
+                                    </Button>
+                                </Link>
                             </Tooltip>
                         </div>
                     </div>

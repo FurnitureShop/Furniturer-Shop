@@ -9,6 +9,7 @@ import User from "../components/Pages/UserPage/Page/User";
 import ProductDetail from "components/Pages/ProductDetailPage/ProductDetail";
 import { AuthLayout } from "components/Pages/AuthPage/AuthLayout";
 import MainLayout from "components/MainLayout";
+import Cart from "components/Pages/CartPage/Cart";
 
 
 const RoutePaths = () => {
@@ -36,6 +37,10 @@ const RoutePaths = () => {
                     <User />
                 </MainLayout>
             } />
+            <Route path={path.cart.route} element={
+                <MainLayout>
+                    <Cart />
+                </MainLayout>} />
         </Routes>
     );
 }
