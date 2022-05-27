@@ -23,6 +23,11 @@ const path = {
         label: "User",
         route: "/user"
     },
+
+    login: {
+        label: "Login",
+        route: "/login"
+    }
 };
 
 export default path;

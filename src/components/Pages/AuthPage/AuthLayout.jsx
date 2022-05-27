@@ -27,7 +27,7 @@ export function AuthLayout(props) {
                 </div>
                 <div className="auth__content-body">
                     <div className="body__form w-8/12 p-5">
-                        <LoginTab />
+                        {children}
                     </div>
                 </div>
                 <div className="auth__content-footer">
