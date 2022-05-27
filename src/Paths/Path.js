@@ -23,6 +23,10 @@ const path = {
         label: "User",
         route: "/user"
     },
+    order: {
+        label: "Order",
+        route: "/order"
+    },
 };
 
 export default path;
