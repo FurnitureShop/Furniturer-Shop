@@ -1,10 +1,6 @@
-<<<<<<< Updated upstream
-import { Grid, Col, Form, Input, Row, Space, Button } from "antd";
-import FloatLabel from "components/FloatLabel/FloatLabel";
-=======
+
 import { Row } from "antd";
->>>>>>> Stashed changes
-import { useState } from "react";
+
 import UserInfoForm from "./form/UserInfoForm";
 
 export default function UserInfoTab() {

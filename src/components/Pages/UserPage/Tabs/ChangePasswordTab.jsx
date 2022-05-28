@@ -1,5 +1,5 @@
 import { Grid, Col, Form, Input, Row, Space, Button } from "antd";
-import FloatLabel from "components/FloatLabel/FloatLabel";
+import FloatLabel from "components/Controls/FloatLabel/FloatLabel";
 import { useState } from "react";
 import plugin from "tailwindcss/plugin";
 

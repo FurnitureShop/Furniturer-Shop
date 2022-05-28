@@ -1,6 +1,6 @@
 import { Button, Drawer, Tooltip } from "antd";
 import Icon from "@ant-design/icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import path from "../../Paths/Path";
 import "./Navbar.scss";
@@ -16,11 +16,23 @@ const userIcon = (props) => <Icon component={IconUser} {...props} />
 const cartIcon = (props) => <Icon component={IconCart} {...props} />
 
 const Navbar = () => {
+    const [headerSticky, setHeaderSticky] = useState(false);
+    const [headerShrink, setHeaderShrink] = useState(false);
+
     const [drawerState, setDrawerState] = useState(false);
     const showDrawer = () => setDrawerState(!drawerState)
 
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+            setHeaderSticky(window.pageYOffset > 0)
+            setHeaderShrink(window.pageYOffset>300)
+        })
+
+        return false;
+    }, [])
+
     return (
-        <header className="header font-poppins">
+        <header className={`header font-poppins ${headerSticky ? "header__sticky" : ""} ${headerShrink ? "header__shrink" : ""}`}>
             <div className="furniturer-container flex justify-between items-center">
                 <div className="mr-4 lg:mr-16 h-10 md:h-14">
                     <Link to={navPath.home.route}>

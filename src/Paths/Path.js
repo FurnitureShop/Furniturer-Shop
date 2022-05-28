@@ -14,7 +14,7 @@ const path = {
     user: {
         label: "User",
         route: "/user"
-    }
+    },
 };
 
 export default path;
