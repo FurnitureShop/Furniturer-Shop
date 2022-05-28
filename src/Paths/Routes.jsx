@@ -7,7 +7,7 @@ import Products from "../components/Pages/ProductPage/Products";
 import Aboutus from "../components/Pages/AboutusPage/Aboutus";
 import User from "../components/Pages/UserPage/Page/User";
 import ProductDetail from "components/Pages/ProductDetailPage/ProductDetail";
-import { AuthLayout } from "components/Pages/AuthPage/AuthLayout";
+import AuthLayout from "components/Pages/AuthPage/AuthLayout";
 import MainLayout from "components/MainLayout";
 import Cart from "components/Pages/CartPage/Cart";
 import LoginTab from "components/Pages/AuthPage/Login/LoginTab";
