@@ -2,14 +2,32 @@ import { Button, Drawer, Tooltip } from "antd";
 import Icon from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import path from "../../Paths/Path";
+import path from "../../paths/Path";
 import "./Navbar.scss";
 
 import IconBurger from "../../assets/icons/IconBurger";
 import IconUser from "../../assets/icons/IconUser";
 import IconCart from "../../assets/icons/IconCart";
+import LocalStorageService from "services/LocalStorage";
+import { useSelector } from "react-redux";
+import { selectUser } from "store/userSlice";
 
-let { user, ...navPath } = path;
+let { user, cart } = path;
+
+let navPath = {
+    home: {
+        label: "Home",
+        route: "/"
+    },
+    products: {
+        label: "Products",
+        route: "/products"
+    },
+    aboutus: {
+        label: "About Us",
+        route: "/aboutus"
+    },
+}
 
 const burgerIcon = (props) => <Icon component={IconBurger} {...props} />
 const userIcon = (props) => <Icon component={IconUser} {...props} />
@@ -22,10 +40,12 @@ const Navbar = () => {
     const [drawerState, setDrawerState] = useState(false);
     const showDrawer = () => setDrawerState(!drawerState)
 
+    const userLogin = useSelector(selectUser);
+
     useEffect(() => {
         window.addEventListener("scroll", () => {
             setHeaderSticky(window.pageYOffset > 0)
-            setHeaderShrink(window.pageYOffset>300)
+            setHeaderShrink(window.pageYOffset > 300)
         })
 
         return false;
@@ -59,33 +79,33 @@ const Navbar = () => {
 
                 <div className="header__widgets-holder ml-3">
                     <div className="header__widget h-full">
-                        <p className="cursor-pointer md:block hidden">Tuyen</p>
+                        {userLogin && <p className="cursor-pointer md:block hidden">{userLogin.name}</p>}
                         <div className="header__widget-content ml-1">
                             <Tooltip title="User">
-                                <Link to={user.route}>
+                                <Link to={userLogin ? user.route : path.login.route}>
                                     <Button
                                         className="header__widget-button"
                                         type="text"
                                         size="large">
                                         <Icon component={userIcon} />
-
                                     </Button>
                                 </Link>
                             </Tooltip>
-
                         </div>
                     </div>
 
                     <div className="header__widget h-full">
                         <div className="header__widget-content">
                             <Tooltip title="Cart">
-                                <Button
-                                    className="header__widget-button"
-                                    type="text"
-                                    size="large">
-                                    <Icon component={cartIcon} />
-                                    <span>0</span>
-                                </Button>
+                                <Link to={cart.route}>
+                                    <Button
+                                        className="header__widget-button"
+                                        type="text"
+                                        size="large">
+                                        <Icon component={cartIcon} />
+                                        <span>0</span>
+                                    </Button>
+                                </Link>
                             </Tooltip>
                         </div>
                     </div>

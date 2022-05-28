@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+<<<<<<< HEAD
 import { ENP_LOGIN, ENP_UPDATE_USER_INFO } from "api/EndPoint";
+=======
+import { ENP_LOGIN } from "api/EndPoint";
+>>>>>>> Login
 import { axios } from "lib/axios/Interceptor";
 import LocalStorageService from "services/LocalStorage";
 
@@ -53,6 +57,7 @@ export const userSlice = createSlice({
         builder.addCase(login.rejected, (state) => {
             state.isLoading = false;
         })
+<<<<<<< HEAD
 
         builder.addCase(updateInfo.pending, (state) => {
             state.isLoading = true;
@@ -67,6 +72,8 @@ export const userSlice = createSlice({
         builder.addCase(updateInfo.rejected, (state) => {
             state.isLoading = false;
         })
+=======
+>>>>>>> Login
     }
 })
 

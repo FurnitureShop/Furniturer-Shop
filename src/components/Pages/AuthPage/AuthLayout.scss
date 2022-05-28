@@ -1,0 +1,69 @@
+.auth {
+    font-family: 'Lato';
+    font-weight: 400;
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+
+    &__image {
+        position: relative;
+        width: 50%;
+        height: 100%;
+
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+
+    &__content {
+        position: relative;
+        width: 50%;
+        height: 100%;
+
+        display: grid;
+        //Header body footer
+        grid-template-rows: auto 1fr auto;
+
+        &-header {
+            padding-top: 30px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+        }
+
+        &-body {
+            width: 100%;
+            padding-bottom: 20px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        &-footer {
+            padding-bottom: 20px;
+
+            text-align: center;
+
+            & .footer__contact {
+                margin-bottom: 50px;
+
+                & a {
+                    color: #47c269;
+                }
+            }
+
+            & .footer__copyright {
+                font-size: 13px;
+                color: #afafaf;
+            }
+        }
+    }
+}
