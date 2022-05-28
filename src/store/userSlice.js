@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ENP_LOGIN } from "api/EndPoint";
+import { ENP_LOGIN, ENP_UPDATE_USER_INFO } from "api/EndPoint";
 import { axios } from "lib/axios/Interceptor";
 import LocalStorageService from "services/LocalStorage";
 
@@ -14,6 +14,17 @@ export const login = createAsyncThunk(
         return response.data;
     }
 )
+
+export const updateInfo = createAsyncThunk(
+    "user/updateInfo",
+    async (data, thunkParam) => {
+        const response = await axios.put(ENP_UPDATE_USER_INFO, data);
+
+        return response.data;
+    }
+)
+
+
 
 export const userSlice = createSlice({
     name: "user",
@@ -40,6 +51,20 @@ export const userSlice = createSlice({
         })
 
         builder.addCase(login.rejected, (state) => {
+            state.isLoading = false;
+        })
+
+        builder.addCase(updateInfo.pending, (state) => {
+            state.isLoading = true;
+        })
+
+        builder.addCase(updateInfo.fulfilled, (state, action) => {
+            state.curUser = action.payload.user;
+            state.isLoading = false;
+            console.log(state.curUser);
+        })
+
+        builder.addCase(updateInfo.rejected, (state) => {
             state.isLoading = false;
         })
     }
