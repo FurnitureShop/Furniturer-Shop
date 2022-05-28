@@ -82,7 +82,7 @@ img {
 }
 
 .active {
-   color: $color--text !important;
+   color: $color--text  !important;
 }
 .color {
    &--gray {
@@ -92,10 +92,17 @@ img {
 
 /* Force update ant style */
 .ant-input {
+<<<<<<< Updated upstream
    padding: 16px 12px 10px 11px;
  }
  
  .ant-select .ant-select-selector {
+=======
+   padding: 20px 12px 6px 11px;
+}
+
+.ant-select .ant-select-selector {
+>>>>>>> Stashed changes
    padding: 16px 10px 4px 11px;
  }
  
