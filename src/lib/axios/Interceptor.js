@@ -91,7 +91,7 @@ function handleError(code = 0, message) {
       // message = "Unexpected error";
       break;
   }
-  notification.error({ message: "Error", description: message });
+  notification.error({ message: "Error", description: message, placement: "bottomLeft" });
 }
 
 export { axiosInstance as axios };
