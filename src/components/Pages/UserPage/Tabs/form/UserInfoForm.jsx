@@ -41,7 +41,7 @@ export default function UserInfoForm() {
             autoComplete="off"
         >
             <Row className="mb-2">
-                <Col span={20}>
+                <Col span={22}>
                     <Form.Item
                         name="name"
                         shouldUpdate={(prevValues, curValues) =>
@@ -57,6 +57,7 @@ export default function UserInfoForm() {
             <Row gutter={16}>
                 <Col span={10}>
                     <Form.Item
+                        style={{ marginTop: "0px" }}
                         name="phone"
                         shouldUpdate={(prevValues, curValues) =>
                             curValues.phone.length === 0 || curValues.phone.length === 1
@@ -67,13 +68,13 @@ export default function UserInfoForm() {
                         </FloatLabel>
                     </Form.Item>
                 </Col>
-                <Col span={10}>
+                <Col span={10} style={{ marginLeft: "10px" }}>
                     <FloatLabel label="Email" value={user.email} disabled>
                         <Input className="cursor-not-allowed" size="large" value={user.email} disabled />
                     </FloatLabel>
                 </Col>
             </Row>
-            <Row className="mt-6">
+            <Row>
                 <Form.Item>
                     <Button className="w-44" size="large" type="primary" htmlType="submit" loading={isLoading}>
                         <span style={{ font: "italic 16px EB Garamond" }}>Save information</span>

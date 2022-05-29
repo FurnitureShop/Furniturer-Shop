@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ENP_LOGIN, ENP_UPDATE_USER_INFO } from "api/EndPoint";
+import { ENP_CHANGE_USER_PASSWORD, ENP_LOGIN, ENP_UPDATE_USER_INFO } from "api/EndPoint";
 import { axios } from "lib/axios/Interceptor";
 import LocalStorageService from "services/LocalStorage";
 
@@ -24,54 +24,63 @@ export const updateInfo = createAsyncThunk(
     }
 )
 
+export const changePassword = createAsyncThunk(
+    "user/changePassword",
+    async (data, thunkParam) => {
+        const response = await axios.put(ENP_CHANGE_USER_PASSWORD, data);
 
+        return response.data;
+    }
+)
 
 export const userSlice = createSlice({
     name: "user",
     initialState: {
         curUser: null,
         isLoading: false,
+        isError: false,
     },
     reducers: {
         logout: (state) => {
+            console.log("RUN HERE");
             LocalStorageService.clearToken("auth");
             LocalStorageService.clearToken("refresh")
             state.curUser = null;
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(login.pending, (state) => {
-            state.isLoading = true;
-        })
-
-        builder.addCase(login.fulfilled, (state, action) => {
-            state.curUser = action.payload.user;
-            state.isLoading = false;
-            console.log(state.curUser);
-        })
-
-        builder.addCase(login.rejected, (state) => {
-            state.isLoading = false;
-        })
-
-        builder.addCase(updateInfo.pending, (state) => {
-            state.isLoading = true;
-        })
-
-        builder.addCase(updateInfo.fulfilled, (state, action) => {
-            state.curUser = action.payload.user;
-            state.isLoading = false;
-            console.log(state.curUser);
-        })
-
-        builder.addCase(updateInfo.rejected, (state) => {
-            state.isLoading = false;
-        })
+        builder
+            .addCase(login.fulfilled, (state, action) => {
+                state.curUser = action.payload.user;
+                state.isLoading = false;
+            })
+            .addCase(updateInfo.fulfilled, (state, action) => {
+                state.curUser = action.payload.user;
+                state.isLoading = false;
+            })
+            .addCase(changePassword.fulfilled, (state) => {
+                state.isLoading = false;
+            })
+            .addMatcher(
+                (action) => action.type.endsWith("/pending"),
+                (state) => {
+                    state.isError = false;
+                    state.isLoading = true;
+                }
+            )
+            .addMatcher(
+                (action) => action.type.endsWith("/rejected"),
+                (state) => {
+                    state.isLoading = false;
+                    state.isError = true;
+                }
+            )
     }
 })
 
 export const selectUser = (state) => state.user.curUser;
 export const selectLoading = (state) => state.user.isLoading;
+export const selectError = (state) => state.user.isError;
 
 export const { logout } = userSlice.actions;
 
