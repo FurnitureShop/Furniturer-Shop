@@ -8,6 +8,9 @@ import "./Navbar.scss";
 import IconBurger from "../../assets/icons/IconBurger";
 import IconUser from "../../assets/icons/IconUser";
 import IconCart from "../../assets/icons/IconCart";
+import LocalStorageService from "services/LocalStorage";
+import { useSelector } from "react-redux";
+import { selectUser } from "store/userSlice";
 
 let { user, cart } = path;
 
@@ -37,6 +40,8 @@ const Navbar = () => {
 
     const [drawerState, setDrawerState] = useState(false);
     const showDrawer = () => setDrawerState(!drawerState)
+
+    const userLogin = useSelector(selectUser);
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -75,10 +80,10 @@ const Navbar = () => {
 
                 <div className="header__widgets-holder ml-3">
                     <div className="header__widget h-full">
-                        <p className="cursor-pointer md:block hidden">Tuyen</p>
+                        {userLogin && <p className="cursor-pointer md:block hidden">{userLogin.name}</p>}
                         <div className="header__widget-content ml-1">
                             <Tooltip title="User">
-                                <Link to={user.route}>
+                                <Link to={userLogin ? user.route : path.login.route}>
                                     <Button
                                         className="header__widget-button"
                                         type="text"

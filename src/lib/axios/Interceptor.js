@@ -66,8 +66,7 @@ axiosInstance.interceptors.response.use(
         }
       });
     }
-
-    handleError(error.response?.status, error.message);
+    handleError(error.response?.status, error.response?.data.message);
     return Promise.reject(error);
   }
 );

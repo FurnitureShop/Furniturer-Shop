@@ -1,15 +1,12 @@
-import { Spin } from "antd";
 import { IMAGES } from "assets/images";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import "./AuthLayout.scss"
-import LoginTab from "./Login/LoginTab";
 
-export function AuthLayout(props) {
+export default function AuthLayout(props) {
     const { children } = props
-    const [isLoading, setIsLoading] = useState(true);
 
     return (
         <div className="auth">
@@ -27,7 +24,7 @@ export function AuthLayout(props) {
                 </div>
                 <div className="auth__content-body">
                     <div className="body__form w-8/12 p-5">
-                        <LoginTab />
+                        {children}
                     </div>
                 </div>
                 <div className="auth__content-footer">

@@ -7,10 +7,15 @@ import Products from "../components/Pages/ProductPage/Products";
 import Aboutus from "../components/Pages/AboutusPage/Aboutus";
 import User from "../components/Pages/UserPage/Page/User";
 import ProductDetail from "components/Pages/ProductDetailPage/ProductDetail";
-import { AuthLayout } from "components/Pages/AuthPage/AuthLayout";
+import AuthLayout from "components/Pages/AuthPage/AuthLayout";
 import MainLayout from "components/MainLayout";
 import Cart from "components/Pages/CartPage/Cart";
+<<<<<<< HEAD
 import Order from "components/Pages/OrderPage/Order";
+=======
+import LoginTab from "components/Pages/AuthPage/Login/LoginTab";
+import RegisterTab from "components/Pages/AuthPage/Register/RegisterTab";
+>>>>>>> master
 
 
 const RoutePaths = () => {
@@ -32,7 +37,17 @@ const RoutePaths = () => {
                     <ProductDetail />
                 </MainLayout>
             } exact />
-            <Route path={path.aboutus.route} element={<AuthLayout />} exact />
+            <Route path={path.aboutus.route} element={<Aboutus />} exact />
+            <Route path={path.login.route} element={
+                <AuthLayout>
+                    <LoginTab />
+                </AuthLayout>
+            } exact />
+            <Route path={path.register.route} element={
+                <AuthLayout>
+                    <RegisterTab />
+                </AuthLayout>
+            } exact />
             <Route path={path.user.route} element={
                 <MainLayout>
                     <User />
