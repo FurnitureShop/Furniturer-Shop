@@ -23,13 +23,10 @@ const path = {
         label: "User",
         route: "/user"
     },
-<<<<<<< HEAD
     order: {
         label: "Order",
         route: "/order"
     },
-=======
-
     login: {
         label: "Login",
         route: "/login"
@@ -39,7 +36,6 @@ const path = {
         label: "Register",
         route: "/register"
     }
->>>>>>> master
 };
 
 export default path;

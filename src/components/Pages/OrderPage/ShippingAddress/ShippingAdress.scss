@@ -1,0 +1,17 @@
+.shipping-address {
+
+    .delivery {
+        margin-bottom: 25px;
+    }
+    
+    .delivery--header,
+    .payment--header {
+
+        & h3, & h4 {
+            font-family: Poppins, sans-serif;
+            font-weight: 400;
+            font-size: 28px;
+            line-height: 1.235;
+        }
+    }
+}
