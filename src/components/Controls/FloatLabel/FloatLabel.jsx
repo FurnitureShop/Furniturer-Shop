@@ -4,14 +4,14 @@ import "./FloatLabel.scss";
 
 const FloatLabel = props => {
   const [focus, setFocus] = useState(false);
-  const { children, label, value, disabled } = props;
+  const { children, label, value, disabled, customClassName } = props;
 
   let labelClass =
     focus || (value && value.length !== 0) ? "label-default label-float" : "label-default";
   labelClass = disabled ? labelClass + " label-disabled" : labelClass;
   return (
     <div
-      className="float-label"
+      className={`float-label ${customClassName ? customClassName : ""}`}
       onBlur={() => setFocus(false)}
       onFocus={() => setFocus(true)}
     >

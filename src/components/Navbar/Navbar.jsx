@@ -29,6 +29,7 @@ let navPath = {
     },
 }
 
+
 const burgerIcon = (props) => <Icon component={IconBurger} {...props} />
 const userIcon = (props) => <Icon component={IconUser} {...props} />
 const cartIcon = (props) => <Icon component={IconCart} {...props} />
@@ -130,7 +131,9 @@ const Navbar = () => {
                     visible={drawerState}
                     onClose={showDrawer}
                 >
-                    <p>Test</p>
+                    <div className="flex flex-col gap-y-2">
+                        {Object.values(path).map((item) => <Link to={item.route}>{item.label}</Link>)}
+                    </div>
                 </Drawer>
             </div>
         </header>

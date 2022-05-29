@@ -10,6 +10,7 @@ import ProductDetail from "components/Pages/ProductDetailPage/ProductDetail";
 import AuthLayout from "components/Pages/AuthPage/AuthLayout";
 import MainLayout from "components/MainLayout";
 import Cart from "components/Pages/CartPage/Cart";
+import Order from "components/Pages/OrderPage/Order";
 import LoginTab from "components/Pages/AuthPage/Login/LoginTab";
 import RegisterTab from "components/Pages/AuthPage/Register/RegisterTab";
 
@@ -52,7 +53,13 @@ const RoutePaths = () => {
             <Route path={path.cart.route} element={
                 <MainLayout>
                     <Cart />
-                </MainLayout>} />
+                </MainLayout>
+            } />
+            <Route path={path.order.route} element={ 
+                <MainLayout>
+                    <Order />
+                </MainLayout>
+            }/>
         </Routes>
     );
 }

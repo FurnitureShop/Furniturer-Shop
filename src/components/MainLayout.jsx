@@ -6,7 +6,7 @@ import Footer from './Footer/Footer'
 export default function MainLayout({ children}) {
 
     return (
-        <main>
+        <main className='main--layout'>
             <Navbar />
             <div>
                 {children}
