@@ -26,7 +26,6 @@ export default function User() {
 
     return (
         <div className="mb-24">
-            <h1>This is user page</h1>
             <div className="myaccount-container">
                 <h1>MY ACCOUNT</h1>
             </div>
