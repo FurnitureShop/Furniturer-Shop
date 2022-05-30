@@ -1,6 +1,6 @@
-import { Table, Typography } from 'antd'
+import { Button, Table, Typography } from 'antd'
 import QuantityControl from 'components/Controls/QuantityControl/QuantityControl';
-import React from 'react'
+import React, { useState } from 'react'
 import "./CartList.scss"
 
 
@@ -12,13 +12,35 @@ let dummyData = [
         price: 30,
         quantity: 1,
         subtotal: 30
+    },
+    {
+        key: "2",
+        img: require("../../../../assets/images/shoplist5.jpg"),
+        name: "hello",
+        price: 30,
+        quantity: 1,
+        subtotal: 30
+    },
+    {
+        key: "3",
+        img: require("../../../../assets/images/shoplist5.jpg"),
+        name: "hello",
+        price: 30,
+        quantity: 1,
+        subtotal: 30
     }
 ]
 
 const { Column } = Table;
-const { Text } = Typography;
+const { Text, Title } = Typography;
 
 const CartList = () => {
+    const [selectedRows, setSelectedRows] = useState([])
+    const handleSelectChange = (newRows) => {
+        setSelectedRows(newRows)
+    }
+
+    const hasSelected = selectedRows.length > 0;
 
     return (
         <section className='cart'>
@@ -29,6 +51,7 @@ const CartList = () => {
                     rowClassName={"cart--list__row"}
                     rowSelection={{
                         type: "checkbox",
+                        onChange: handleSelectChange,
                     }}>
                     <Column
                         dataIndex={"img"}
@@ -50,7 +73,7 @@ const CartList = () => {
                                     style={{
                                         color: "rgb(211, 47, 47)",
                                         cursor: "pointer"
-                                }}>Remove</Text>
+                                    }}>Remove</Text>
                             </div>
                         }
                     />
@@ -82,6 +105,18 @@ const CartList = () => {
                         }
                     />
                 </Table>
+            </div>
+
+            <div className={`cart--confirm ${hasSelected > 0 ? "" : "invisible"}`}>
+                <Text>{1} {"item(s) selected"}</Text>
+                <div className='cart--confirm--btn'>
+                    <Title style={{ fontWeight: "500", marginBottom: 0 }} level={4}>Total: ${60}</Title>
+                    <Button
+                        type="primary"
+                        className='cart--confirm--btn--btn'>
+                        Checkout
+                    </Button>
+                </div>
             </div>
         </section>
     )
