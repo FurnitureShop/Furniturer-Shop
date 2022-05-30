@@ -1,8 +1,9 @@
-import { Form, Input, Select, Typography } from 'antd'
+import { Button, Form, Input, Select, Typography } from 'antd'
 import CheckboxControl from 'components/Controls/CheckboxControl/CheckboxControl';
 import FloatLabel from 'components/Controls/FloatLabel/FloatLabel';
 import SelectControl from 'components/Controls/SelectControl/SelectControl';
 import React from 'react'
+import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import './ShippingAdress.scss'
 
 const { Title } = Typography;
@@ -16,7 +17,6 @@ const ShippingAddress = () => {
                 <div className='delivery--header'>
                     <Title
                         level={4}
-                        className
                     >Delivery Information</Title>
                 </div>
 
@@ -59,6 +59,15 @@ const ShippingAddress = () => {
                         className
                     >Payment Method</Title>
                 </div>
+                <PaymentMethod />
+            </div>
+
+            <div className='order-btn'>
+                <Button
+                    type="primary"
+                    className='order-btn--btn'>
+                    Confirm Order
+                </Button>
             </div>
         </Form>
     )

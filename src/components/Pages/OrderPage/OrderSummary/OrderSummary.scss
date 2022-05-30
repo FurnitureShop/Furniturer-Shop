@@ -1,0 +1,47 @@
+.order-summary {
+    padding-right: 30px;
+
+    &>h4 {
+        font-family: Poppins, sans-serif;
+        font-weight: 400;
+        font-size: 28px;
+        line-height: 1.235;
+    }
+
+    span,
+    h5,
+    h4,
+    h6 {
+        font-family: Poppins, sans-serif;
+    }
+
+    .products--item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+
+        &--img {
+
+            & img {
+                height: 130px;
+                width: auto;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .products--calc {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &__total {
+            span {
+                font-weight: 500;
+                font-size: 23px;
+                line-height: 1.4;
+            }
+        }
+    }
+}

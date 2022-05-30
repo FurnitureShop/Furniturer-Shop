@@ -6,12 +6,12 @@ import Footer from './Footer/Footer'
 export default function MainLayout({ children}) {
 
     return (
-        <main className='main--layout'>
+        <div className='main--layout flex flex-col'>
             <Navbar />
-            <div>
+            <main className='main--content flex-1'>
                 {children}
-            </div>
+            </main>
             <Footer />
-        </main>
+        </div>
     )
 }
