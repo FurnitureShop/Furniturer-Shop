@@ -1,21 +1,78 @@
-import { LoadingOutlined } from "@ant-design/icons";
-import { Grid, Col, Form, Input, Row, Space, Button, Spin, List, InputNumber, Typography, Popconfirm, Table } from "antd";
-import FloatLabel from "components/Controls/FloatLabel/FloatLabel";
+import { Grid, Col, Form, Input, Row, Space, Button, Spin, List, InputNumber, Typography, Popconfirm, Table, Select, notification } from "antd";
+import { BASE_API_LOCATION_VN_URL, ENP_ADD_ADDRESS, ENP_CHANGE_ADDRESS, ENP_DISTRICT, ENP_PROVINCE, ENP_WARD } from "api/EndPoint";
+import axios from "axios";
+
+import { axios as axiosAuth } from "lib/axios/Interceptor";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "store/userSlice";
+import AddAddressForm from "./form/AddAddressForm";
 
 export default function AddressShippingTab() {
-    const [loading, setLoading] = useState(false);
+    //Editing cell create
+    const [provinceData, setProvinceData] = useState([]);
+    const [districtData, setDistrictData] = useState([]);
+    const [wardData, setWardData] = useState([]);
 
-    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
-    //Create data
-    const originData = [{
-        key: 1,
-        landNumber: 12,
-        ward: "Hiep Binh Chanh",
-        district: "1",
-        province: "Ho Chi Minh city",
-    }];
+    const user = useSelector(selectUser);
+    const [form] = Form.useForm();
+    const [data, setData] = useState(user?.address);
+    const [editingKey, setEditingKey] = useState('');
+
+    const [openModel, setOpenModel] = useState(false);
+
+    useEffect(() => {
+        axios.get(BASE_API_LOCATION_VN_URL + ENP_PROVINCE)
+            .then((response) => {
+                const options = [];
+                for (let i = 0; i < response.data.results.length; i++) {
+                    options.push({
+                        label: response.data.results[i]["province_name"],
+                        value: response.data.results[i]["province_id"]
+                    })
+                }
+                setProvinceData(options)
+            });
+    }, [])
+
+    const onHandleProvinceSelected = (value, option) => {
+        form.setFieldsValue({ province: option.label });
+
+        axios.get(BASE_API_LOCATION_VN_URL + ENP_DISTRICT + value)
+            .then((response) => {
+                const options = [];
+                for (let i = 0; i < response.data.results.length; i++) {
+                    options.push({
+                        label: response.data.results[i]["district_name"],
+                        value: response.data.results[i]["district_id"],
+                    })
+                }
+                form.setFieldsValue({ district: '', ward: '' })
+                setDistrictData(options);
+
+            });
+    }
+
+    const onHandleDistrictSelected = (value, option) => {
+        form.setFieldsValue({ district: option.label });
+
+        axios.get(BASE_API_LOCATION_VN_URL + ENP_WARD + value)
+            .then((response) => {
+                const options = [];
+                for (let i = 0; i < response.data.results.length; i++) {
+                    options.push({
+                        label: response.data.results[i]["ward_name"],
+                        value: response.data.results[i]["ward_id"],
+                    })
+                }
+                form.setFieldsValue({ ward: '' });
+                setWardData(options)
+            });
+    }
+    const onHandleWardSelected = (value, option) => {
+        form.setFieldsValue({ ward: option.label });
+    }
 
     //Create editable cell
     const EditableCell = ({
@@ -28,7 +85,18 @@ export default function AddressShippingTab() {
         children,
         ...restProps
     }) => {
-        const inputNode = inputType === 'number' ? <InputNumber size="small" /> : <Input size="small" />;
+        let comboBoxNode;
+
+        if (dataIndex === "province") comboBoxNode =
+            <Select size="large" style={{ width: "200px" }}
+                value={form.getFieldValue("province")} options={provinceData} onSelect={onHandleProvinceSelected} />
+        else if (dataIndex === "district") comboBoxNode =
+            <Select size="large" style={{ width: "200px" }}
+                value={form.getFieldValue("district")} options={districtData} onChange={onHandleDistrictSelected} />
+        else if (dataIndex === "ward") comboBoxNode =
+            <Select size="large" style={{ width: "200px" }}
+                value={form.getFieldValue("ward")} options={wardData} onChange={onHandleWardSelected} />
+        else comboBoxNode = <Input style={{ paddingTop: "10px" }} />
 
         return (
             <td {...restProps}>
@@ -38,12 +106,11 @@ export default function AddressShippingTab() {
                         style={{ margin: 0 }}
                         rules={[
                             {
-                                required: true,
                                 message: `Please input ${title}!`,
                             },
                         ]}
                     >
-                        {inputNode}
+                        {comboBoxNode}
                     </Form.Item>
                 ) : (
                     children
@@ -51,41 +118,61 @@ export default function AddressShippingTab() {
             </td>
         );
     };
-    const [form] = Form.useForm();
-    const [data, setData] = useState(originData);
-    const [editingKey, setEditingKey] = useState('');
 
 
-    const isEditing = record => record?.key === editingKey;
+    // Table 
+    const updateAddress = (_id, address) => {
+        axiosAuth.put(ENP_CHANGE_ADDRESS + _id, address)
+            .then((response) => {
+                setData(response.data.user.address)
+                notification.success({
+                    message: "Update success",
+                    placement: "bottomLeft"
+                })
+            })
+    }
+
+    const deleteAddress = (value) => {
+        axiosAuth.delete(ENP_CHANGE_ADDRESS + value._id, value)
+            .then((response) => {
+                setData(response.data.user.address)
+                notification.success({
+                    message: "Delete success",
+                    placement: "bottomLeft"
+                })
+            })
+    }
+
+    const onFinish = (value) => {
+        axiosAuth.post(ENP_ADD_ADDRESS, value)
+            .then((response) => {
+                setData(response.data.user.address)
+                notification.success({
+                    message: "Add success",
+                    placement: "bottomLeft"
+                })
+            })
+        setOpenModel(false);
+    }
+
+    const isEditing = record => record?._id === editingKey;
 
 
     const edit = (record) => {
-        form.setFieldsValue({ name: '', age: '', address: '', ...record });
-        setEditingKey(record.key);
+        form.setFieldsValue({ landNumber: '', ward: '', district: '', province: '', ...record });
+        setEditingKey(record._id);
     };
 
     const cancel = () => {
         setEditingKey('');
     };
-    const save = async (key) => {
+    const save = async (_id) => {
         try {
             const row = (await form.validateFields());
 
-            const newData = [...data];
-            const index = newData.findIndex(item => key === item.key);
-            if (index > -1) {
-                const item = newData[index];
-                newData.splice(index, 1, {
-                    ...item,
-                    ...row,
-                });
-                setData(newData);
-                setEditingKey('');
-            } else {
-                newData.push(row);
-                setData(newData);
-                setEditingKey('');
-            }
+            updateAddress(_id, row);
+
+            setEditingKey('');
         } catch (errInfo) {
             console.log('Validate Failed:', errInfo);
         }
@@ -113,17 +200,15 @@ export default function AddressShippingTab() {
         {
             title: 'Province',
             dataIndex: 'province',
-            width: '25%',
+            width: '18%',
             editable: true,
         },
         {
-            title: 'operation',
-            dataIndex: 'operation',
             render: (text, record) => {
                 const editable = isEditing(record);
                 return editable ? (
                     <span>
-                        <Typography.Link onClick={() => save(record.key)} style={{ marginRight: 8 }}>
+                        <Typography.Link onClick={() => save(record._id)} style={{ marginRight: 8 }}>
                             Save
                         </Typography.Link>
                         <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
@@ -131,16 +216,22 @@ export default function AddressShippingTab() {
                         </Popconfirm>
                     </span>
                 ) : (
-                    <Typography.Link disabled={editingKey !== ''} onClick={() => { console.log(record); edit(record) }}>
-                        Edit
-                    </Typography.Link>
+                    <span>
+                        <Typography.Link disabled={editingKey !== ''}
+                            onClick={() => { edit(record) }} style={{ color: "#47c269", marginRight: 20 }}>
+                            Edit
+                        </Typography.Link>
+                        <Typography.Link disabled={editingKey !== ''}
+                            onClick={() => { deleteAddress(record) }} style={{ color: "#d32f2f" }}>
+                            Delete
+                        </Typography.Link>
+                    </span>
                 );
             },
         },
     ];
 
     const mergedColumns = columns.map(col => {
-        console.log(col)
         if (!col.editable) {
             return col;
         }
@@ -156,6 +247,9 @@ export default function AddressShippingTab() {
             }),
         };
     });
+
+
+
 
     return (
         <>
@@ -175,6 +269,15 @@ export default function AddressShippingTab() {
                     }}
                 />
             </Form>
+            <Button size="large" style={{ position: "relative", top: "-3.125rem" }} type="primary"
+                onClick={() => { setOpenModel(true) }}>
+                <span style={{ font: "italic 16px EB Garamond" }}>Add Address</span>
+            </Button>
+            <AddAddressForm
+                visible={openModel}
+                onCancel={() => { setOpenModel(false) }}
+                onFinish={onFinish}
+            />
         </>
     )
 }

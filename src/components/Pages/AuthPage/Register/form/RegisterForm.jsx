@@ -1,12 +1,10 @@
 import { Button, Form, Input } from "antd";
-import { ENP_LOGIN, ENP_REGISTER } from "api/EndPoint";
-import { data } from "autoprefixer";
+import { ENP_REGISTER } from "api/EndPoint";
 import FloatLabel from "components/Controls/FloatLabel/FloatLabel";
 import { axios } from "lib/axios/Interceptor";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import LocalStorageService from "services/LocalStorage";
 import { login, selectLoading, selectUser } from "store/userSlice";
 import "./RegisterForm.scss"
 
@@ -29,9 +27,7 @@ export default function RegisterForm() {
     }
 
     const onConfirmPasswordChangeHandler = (value) => {
-
         form.setFieldsValue({ confirmPassword: value });
-        console.log(form.getFieldValue("confirmPassword"))
     }
 
     //Login success -> go back to previous page
@@ -96,13 +92,23 @@ export default function RegisterForm() {
                 name="confirmPassword"
                 rules={[{
                     required: true,
-                    message: 'Please input your confirm password!',
+                    message: 'Please confirm your password!',
                     type: "string",
                     min: 4,
-                }]}
+                },
+                ({ getFieldValue }) => ({
+                    validator(_, value) {
+                        if (!value || getFieldValue('password') === value) {
+                            return Promise.resolve();
+                        }
+                        return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                    },
+                }),
+                ]}
                 shouldUpdate={(prevValues, curValues) =>
                     curValues.confirmPassword.length === 0 || curValues.confirmPassword.length === 1
-                }>
+                }
+            >
                 <FloatLabel label="Confirm Password" value={form.getFieldValue("confirmPassword")}>
                     <Input type="password" size="large" onChange={(e) => onConfirmPasswordChangeHandler(e.target.value)} />
                 </FloatLabel>
@@ -123,6 +129,6 @@ export default function RegisterForm() {
                     Sign up
                 </Button>
             </Form.Item>
-        </Form>
+        </Form >
     )
 }
