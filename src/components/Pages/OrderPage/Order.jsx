@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import OrderSummary from './OrderSummary/OrderSummary'
 import ShippingAddress from './ShippingAddress/ShippingAddress'
 
 const Order = () => {
@@ -21,7 +22,7 @@ const Order = () => {
             </div>
 
             <div className='col-span-3 order-1 md:order-2 md:col-span-1'>
-                <h1>part 2</h1>
+                <OrderSummary />
             </div>
         </section>
     )

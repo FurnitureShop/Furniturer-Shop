@@ -8,7 +8,7 @@ import "./Navbar.scss";
 import IconBurger from "../../assets/icons/IconBurger";
 import IconUser from "../../assets/icons/IconUser";
 import IconCart from "../../assets/icons/IconCart";
-import LocalStorageService from "services/LocalStorage";
+//import LocalStorageService from "services/LocalStorage";
 import { useSelector } from "react-redux";
 import { selectUser } from "store/userSlice";
 
@@ -46,7 +46,7 @@ const Navbar = () => {
     useEffect(() => {
         window.addEventListener("scroll", () => {
             setHeaderSticky(window.pageYOffset > 0)
-            setHeaderShrink(window.pageYOffset > 300)
+            setHeaderShrink(window.pageYOffset > 400)
         })
 
         return false;
