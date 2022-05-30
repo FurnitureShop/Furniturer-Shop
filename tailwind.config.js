@@ -48,6 +48,9 @@ module.exports = {
         footer_bg: {
           DEFAULT: '#f4f2f2'
         }
+      },
+      lineHeight: {
+        '20': '5rem',
       }
     },
   },

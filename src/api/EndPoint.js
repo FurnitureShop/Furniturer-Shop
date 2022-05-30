@@ -9,6 +9,8 @@ export const ENP_CHANGE_USER_PASSWORD = "user/changepassword";
 export const ENP_ADD_ADDRESS = "address";
 export const ENP_CHANGE_ADDRESS = "address/";
 
+export const ENP_GET_PRODUCT_BY_LIST_ID = "product/getproductbylistid"
+
 
 //API VietNam location
 export const BASE_API_LOCATION_VN_URL = "https://vapi.vnappmob.com/api/";
