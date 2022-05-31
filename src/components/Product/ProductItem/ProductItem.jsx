@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import "./ProductItem.scss"
 
-const ProductItem = ({ id }) => {
+const ProductItem = ({ id, name, price, imgUrl, category }) => {
 
     const navigate = useNavigate();
     const handleNavigation = () => {
@@ -15,14 +15,12 @@ const ProductItem = ({ id }) => {
                 onClick={handleNavigation}>
                 <img
                     className="product__thumbnail-image"
-                    src='https://konsept.qodeinteractive.com/wp-content/uploads/2020/04/shoplist6.jpg'
+                    src={imgUrl}
                     alt="thumbnail"
                 />
                 <div className='product__thumbnail-overlay'>
-
                     <div className='product__thumbnail-overlay-addcart'>
-                        <a  href="/"
-                            className='furniturer-link text--italic'>
+                        <a className='furniturer-link text--italic'>
                             Read more
                         </a>
                     </div>
@@ -32,16 +30,23 @@ const ProductItem = ({ id }) => {
             <div className='product__content'>
                 <div className='product__content__info'>
                     <h5 className='product__content__info-name'>
-                        Chair demo
+                        {name}
                     </h5>
                     <div className='product__content__info-category'>
-                        <span>
-                            <a href="/">Home demo</a>
-                        </span>
+                        {/* <span>
+                            {category.map((item) => (
+                                <a href="/">{item}</a>
+                            ))}
+                        </span> */}
+                        {category.map((item, index) => index === 0 ?
+                            (<span><a href='/'>{item}</a></span>)
+                            :
+                            (<span>, <a href='/'>{item}</a></span>))
+                        }
                     </div>
                 </div>
                 <div className='product__content__price'>
-                    $20.00
+                    ${price.toFixed(2)}
                 </div>
             </div>
         </div>

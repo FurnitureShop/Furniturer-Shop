@@ -22,8 +22,10 @@ const Products = () => {
 
                     <Pagination
                         className="products--lists__pagination"
-                        total={10}
-                        pageSize={1} />
+                        total={120}
+                        pageSize={12}
+                        showSizeChanger={false}
+                    />
                 </div>
             </main>
         </div>
