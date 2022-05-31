@@ -2,7 +2,7 @@ import { Button, Drawer, Tooltip } from "antd";
 import Icon from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import path from "../../Paths/Path";
+import path from "../../paths/Path";
 import "./Navbar.scss";
 
 import IconBurger from "../../assets/icons/IconBurger";

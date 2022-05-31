@@ -21,7 +21,7 @@ const ProductItem = ({ id }) => {
                 <div className='product__thumbnail-overlay'>
 
                     <div className='product__thumbnail-overlay-addcart'>
-                        <a  href="/"
+                        <a href="/"
                             className='furniturer-link text--italic'>
                             Read more
                         </a>
