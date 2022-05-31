@@ -1,42 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import ProductItem from './ProductItem/ProductItem';
+import { productsData as data } from './ProductsData';
 //import { Row, Col } from 'antd';
 
-//
-//THIS IS FOR TESTING ROUTING!!!!!!!
-//
-const productList = [
-    {
-        _id: 0, 
-    },
-    {
-        _id: 1, 
-    },
-    {
-        _id: 2, 
-    },
-    {
-        _id: 3, 
-    },
-    {
-        _id: 4, 
-    },
-    {
-        _id: 5, 
-    },
-    
-]
+
+const productsList = Object.values(data.product)
+
 
 const ProductList = (props) => {
+
+    const [products, setProducts] = useState([])
+    useEffect(() => {
+        setProducts(productsList)
+    }, [])
 
 
     return (
         <div className={`productlist grid grid-cols-1 
                             ${props.sm} ${props.lg} ${props.xl}
                             gap-x-6 gap-y-12`}>
-            { productList.map((product) => <ProductItem id={product._id}/>)}
-            
+            {products.map((product) =>
+                <ProductItem
+                    id={product._id}
+                    name={product.name}
+                    price={product.price}
+                    imgUrl={product.image}
+                    category={product.category}
+                />)}
+
         </div>
     )
 }
