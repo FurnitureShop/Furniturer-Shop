@@ -8,13 +8,14 @@ import { productsData as data } from './ProductsData';
 const productsList = Object.values(data.product)
 
 
-const ProductList = (props) => {
+const ProductList = ({cate, ...props }) => {
 
     const [products, setProducts] = useState([])
     useEffect(() => {
         setProducts(productsList)
     }, [])
 
+    console.log(cate)
 
     return (
         <div className={`productlist grid grid-cols-1 
