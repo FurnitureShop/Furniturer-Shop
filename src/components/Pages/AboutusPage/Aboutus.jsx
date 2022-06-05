@@ -1,9 +1,18 @@
 import React from "react";
+import AboutUsBanner from "./AboutUsBanner";
+import AboutUsComment from "./AboutUsComment";
+import AboutUsTeam from "./AboutUsTeam";
+import ContactForm from "./ContactForm";
 
 const Aboutus = () => {
+    const container = "furniturer-container"
+
     return (
-        <div>
-            <h1>This is an About Us page</h1>
+        <div className="about-us ">
+            <AboutUsBanner />
+            <AboutUsComment container={container} />
+            <AboutUsTeam container={container} />
+            <ContactForm container={container}/>
         </div>
     );
 }

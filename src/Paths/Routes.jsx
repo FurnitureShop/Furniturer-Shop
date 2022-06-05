@@ -34,7 +34,11 @@ const RoutePaths = () => {
                     <ProductDetail />
                 </MainLayout>
             } exact />
-            <Route path={path.aboutus.route} element={<Aboutus />} exact />
+            <Route path={path.aboutus.route} element={
+                <MainLayout>
+                    <Aboutus />
+                </MainLayout>
+            } exact />
             <Route path={path.login.route} element={
                 <AuthLayout>
                     <LoginTab />

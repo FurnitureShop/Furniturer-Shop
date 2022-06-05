@@ -1,14 +1,15 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import "./ProductItem.scss"
 
 const ProductItem = ({ id, name, price, imgUrl, category }) => {
-
     const navigate = useNavigate();
     const handleNavigation = () => {
         navigate(`/products/${id}`)
     }
 
+    const [searchCategory, setSearchCategory] = useSearchParams();
+    
     return (
         <div className='product'>
             <div className='product__thumbnail'
@@ -38,10 +39,16 @@ const ProductItem = ({ id, name, price, imgUrl, category }) => {
                                 <a href="/">{item}</a>
                             ))}
                         </span> */}
-                        {category.map((item, index) => index === 0 ?
-                            (<span><a href='/'>{item}</a></span>)
-                            :
-                            (<span>, <a href='/'>{item}</a></span>))
+                        {category.map((item, index) => (
+                            <span>
+                                {index === 0 ? "" : ", "}
+                                <a
+                                    onClick={() => {
+                                        navigate(`/products/?cate=${item}`)
+                                    }}
+                                >{item}</a>
+                            </span>
+                        ))
                         }
                     </div>
                 </div>
