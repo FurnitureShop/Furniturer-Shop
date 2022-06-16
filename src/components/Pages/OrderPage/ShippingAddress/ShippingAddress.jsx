@@ -33,15 +33,21 @@ const ShippingAddress = () => {
                     </FloatLabel>
                 </div>
 
-                <FloatLabel label="Street">
-                    <Input size='large' />
+                <FloatLabel>
+                    <Select
+                        size='large'
+                        showSearch
+                        placeholder="Select an address"
+                        style={{
+                            width: "100%"
+                        }}
+                    >
+                        <Option value="1">Address 1</Option>
+                        <Option value="2">Address 2</Option>
+                        <Option value="3">Address 3</Option>
+                    </Select>
                 </FloatLabel>
 
-                <div className='flex flex-row gap-x-3'>
-                    <SelectControl customClassName="flex-1" label="Province" />
-                    <SelectControl customClassName="flex-1" label="District" />
-                    <SelectControl customClassName="flex-1" label="Ward" />
-                </div>
 
                 <FloatLabel label="Notes">
                     <Input size='large' />
