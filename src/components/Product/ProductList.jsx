@@ -1,37 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React from "react";
 
-import ProductItem from './ProductItem/ProductItem';
-import { productsData as data } from './ProductsData';
+import ProductItem from "./ProductItem/ProductItem";
 //import { Row, Col } from 'antd';
 
+const ProductList = ({ products, ...props }) => {
+  //   console.log(cate);
 
-const productsList = Object.values(data.product)
-
-
-const ProductList = ({cate, ...props }) => {
-
-    const [products, setProducts] = useState([])
-    useEffect(() => {
-        setProducts(productsList)
-    }, [])
-
-    console.log(cate)
-
-    return (
-        <div className={`productlist grid grid-cols-1 
+  return (
+    <div
+      className={`productlist grid grid-cols-1 
                             ${props.sm} ${props.lg} ${props.xl}
-                            gap-x-6 gap-y-12`}>
-            {products.map((product) =>
-                <ProductItem
-                    id={product._id}
-                    name={product.name}
-                    price={product.price}
-                    imgUrl={product.image}
-                    category={product.category}
-                />)}
-
-        </div>
-    )
-}
+                            gap-x-6 gap-y-12`}
+    >
+      {products?.map((product, index) => (
+        <ProductItem
+          key={index}
+          id={product._id}
+          name={product.name}
+          price={product.price}
+          imgUrl={product.image}
+          category={product.category}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default ProductList;
