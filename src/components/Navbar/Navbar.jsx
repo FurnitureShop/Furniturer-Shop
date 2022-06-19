@@ -41,6 +41,7 @@ const Navbar = () => {
   const showDrawer = () => setDrawerState(!drawerState);
 
   const userLogin = useSelector(selectUser);
+  console.log(userLogin);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -111,7 +112,7 @@ const Navbar = () => {
                     size="large"
                   >
                     <Icon component={cartIcon} />
-                    <span>0</span>
+                    <span>{userLogin?.cart?.length || 0}</span>
                   </Button>
                 </Link>
               </Tooltip>

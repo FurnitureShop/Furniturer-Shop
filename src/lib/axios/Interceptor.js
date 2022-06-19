@@ -32,22 +32,26 @@ axiosInstance.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
+    notification.success({
+      message: "Success",
+      description: response?.data?.message || "",
+      placement: "bottomLeft",
+    });
     return response;
   },
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     const originalRequest = error.config;
-    console.log(originalRequest);
-    console.log(error)
     //  there is any previous get token request
     if (
-      (error.response?.status === 400 || error.response?.status === 401) &&
+      (error.response?.status === 400 ||
+        error.response?.status === 401 ||
+        error.response?.status === 403) &&
       !LocalStorageService.getAuthToken()
     ) {
-
-      window.location = "/" + "login?isWarning=true";
       handleError(error.response?.status, error.message);
-
+      window.history.pushState({}, "", "/login?isWarning=true");
+      window.history.go();
       return Promise.reject(error);
     }
 
@@ -78,10 +82,10 @@ function handleError(code = 0, message) {
       // TODO: turn on next line to rediect to login page if auth_token exprired
       break;
     case STATUS_ERROR.HTTP_400_BAD_REQUEST:
-      message = "Bad request, recheck information ";
+      // message = "Bad request, recheck information ";
       break;
     case STATUS_ERROR.HTTP_404_NOT_FOUND:
-      message = "Item not found";
+      // message = "Item not found";
       break;
     case STATUS_ERROR.HTTP_500_INTERNAL_SERVER_ERROR:
       message = "Internal server error, please contact administrator";
@@ -91,7 +95,11 @@ function handleError(code = 0, message) {
       // message = "Unexpected error";
       break;
   }
-  notification.error({ message: "Error", description: message, placement: "bottomLeft" });
+  notification.error({
+    message: "Error",
+    description: message,
+    placement: "bottomLeft",
+  });
 }
 
 export { axiosInstance as axios };

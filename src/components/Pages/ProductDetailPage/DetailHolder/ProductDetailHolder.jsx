@@ -1,63 +1,118 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Form } from "antd";
 import React from "react";
-import "./ProductDetailHolder.scss"
+import "./ProductDetailHolder.scss";
 import QuantityControl from "components/Controls/QuantityControl/QuantityControl";
-import { useForm } from 'react-hook-form'
-
-const tags = [
-    "bedroom",
-    "decorative"
-]
+import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProduct, selectProduct } from "store/productSlice";
+import { addToCart, selectUser } from "store/userSlice";
+import { useEffect } from "react";
 
 const ProductDetailHolder = () => {
+  let { id } = useParams();
+  const dispatch = useDispatch();
 
+  const products = useSelector(selectProduct);
+  const [product, setProduct] = useState({});
 
-    return (
-        <div className="productdetail">
-            <div className="detail--thumbnail">
-                <img
-                    className="detail--thumbnail__img"
-                    src="https://konsept.qodeinteractive.com/wp-content/uploads/2020/04/shoplist6.jpg"
-                    alt="This is a thumbnail for product" />
-            </div>
+  useEffect(() => {
+    if (!products || products.length === 0) {
+      const fetchData = async () => {
+        await dispatch(getAllProduct());
+        setProduct(products.find((product) => product["_id"] === id));
+      };
+      fetchData();
+    } else setProduct(products.find((product) => product["_id"] === id));
+  }, []);
 
-            <div className="detail--info flex flex-col gap-y-7">
-                <div>
-                    <h1 className="detail--info__name">The name of the Product</h1>
-                    <p className="detail--info__price">$20.0</p>
-                </div>
-                <div className="detail--info__description">
-                    <p>Metal meets oak in this three-legged floor lamp designed by the Danish designer Henrik Pedersen. The Outrigger floor lamp has an adjustable shade that makes it easy to light things up in any height or direction.</p>
-                </div>
+  const navigate = useNavigate();
+  const onClickAddToCart = () => {
+    dispatch(
+      addToCart({
+        productID: id,
+        quantity: quantity,
+      })
+    );
+  };
 
-                <Form className="detail--info__add gap-x-6">
-                    <div>
-                        <QuantityControl />
-                    </div>
+  const [quantity, setQuantity] = useState(1);
 
-                    <div className="detail--info__add-submit">
-                        <a href="">
-                            <span>Add to cart</span>
-                        </a>
-                    </div>
-                </Form>
+  const updateQuantity = (quantity) => {
+    if (quantity > 0 && quantity <= product?.inStock) setQuantity(quantity);
+  };
 
-                <div className="detail--info__tags">
-                    <span className="detail--info__tags-label">Categories: </span>
-                    <span className="detail--info__tags-tag">
-                        {tags.map((item, index) => {
-                            return (
-                                <span key={index}>
-                                    {index !== 0 ? ", " : " "}
-                                    <a>{item}</a>
-                                </span>
-                            )
-                        })}
-                    </span>
-                </div>
-            </div>
+  return (
+    <div className="productdetail">
+      <div className="detail--thumbnail">
+        <img
+          className="detail--thumbnail__img"
+          src={
+            (product?.image && product?.image[0]) ||
+            "https://phutungnhapkhauchinhhang.com/trangchu/default-thumbnail/"
+          }
+          alt="This is a thumbnail for product"
+        />
+      </div>
+
+      <div className="detail--info flex flex-col gap-y-7">
+        <div>
+          <h1 className="detail--info__name">{product?.name}</h1>
+          <p className="detail--info__price">${product?.price?.toFixed(2)}</p>
         </div>
-    )
-}
+        <div className="detail--info__description">
+          <p>{product?.description}</p>
+        </div>
+        <p className="detail--info__material">Material: {product?.material}</p>
+        <p className="detail--info__size">
+          Size:{" "}
+          {`${product?.size?.width} x ${product?.size?.height} x ${product?.size?.depth} ${product?.size?.unit}`}{" "}
+        </p>
+        <p className="detail--info__size">Instock: {product?.inStock}</p>
 
-export default ProductDetailHolder
+        <Form className="detail--info__add gap-x-6">
+          <div>
+            <QuantityControl
+              value={quantity}
+              onUpdate={updateQuantity}
+              disable={
+                quantity === 1 ? -1 : quantity === product?.inStock ? 1 : 0
+              }
+            />
+          </div>
+
+          <div className="detail--info__add-submit">
+            <a onClick={onClickAddToCart}>
+              <span>Add to cart</span>
+            </a>
+          </div>
+        </Form>
+
+        <div className="detail--info__tags">
+          <span className="detail--info__tags-label">Categories: </span>
+          <span className="detail--info__tags-tag">
+            {product?.category?.map((item, index) => {
+              return (
+                <span key={index}>
+                  {index !== 0 ? ", " : " "}
+                  <a
+                    onClick={() => {
+                      navigate(`/products?category=${item}`);
+                    }}
+                  >
+                    {item}
+                  </a>
+                </span>
+              );
+            })}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProductDetailHolder;

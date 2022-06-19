@@ -15,6 +15,8 @@ export const ENP_GET_PRODUCT_BY_LIST_ID = "product/getproductbylistid";
 export const ENP_GET_ALL_CATEGORIES = "category";
 export const ENP_GET_PRODUCT_BY_CATEGORY = "category/";
 
+export const ENP_CART = "cart/";
+
 //API VietNam location
 export const BASE_API_LOCATION_VN_URL = "https://vapi.vnappmob.com/api/";
 export const ENP_PROVINCE = "province/";

@@ -6,7 +6,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LocalStorageService from "services/LocalStorage";
-import { login, selectLoading, selectUser } from "store/userSlice";
+import { getAllProduct, selectProduct } from "store/productSlice";
+import { getCart, login, selectLoading, selectUser } from "store/userSlice";
 import "./LoginForm.scss";
 
 export default function LoginForm() {
@@ -30,6 +31,7 @@ export default function LoginForm() {
   //Login success -> go back to previous page
   useEffect(() => {
     if (user) {
+      dispatch(getCart());
       navigate(-1);
     }
   }, [user]);

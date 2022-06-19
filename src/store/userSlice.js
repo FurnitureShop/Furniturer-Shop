@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  ENP_CART,
   ENP_CHANGE_USER_PASSWORD,
   ENP_LOGIN,
   ENP_UPDATE_USER_INFO,
 } from "api/EndPoint";
 import { axios } from "lib/axios/Interceptor";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LocalStorageService from "services/LocalStorage";
-import { getAllProduct } from "./productSlice";
+import { getAllProduct, selectProduct } from "./productSlice";
 
 export const login = createAsyncThunk(
   "auth/login",
@@ -39,6 +40,19 @@ export const changePassword = createAsyncThunk(
   }
 );
 
+export const addToCart = createAsyncThunk(
+  "cart/addToCart",
+  async (data, thunkParam) => {
+    const response = await axios.post(ENP_CART, data);
+    return response.data;
+  }
+);
+
+export const getCart = createAsyncThunk("cart/get", async () => {
+  const response = await axios.get(ENP_CART);
+  return response.data;
+});
+
 export const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -58,16 +72,28 @@ export const userSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.curUser = action.payload.user;
         state.isLoading = false;
+        console.log(state.curUser);
+        console.log("FINISH");
       })
       .addCase(updateInfo.fulfilled, (state, action) => {
         state.curUser = action.payload.user;
+        state.isLoading = false;
+      })
+      .addCase(addToCart.fulfilled, (state, action) => {
+        state.curUser.cart = action.payload.userCart;
+        state.isLoading = false;
+      })
+      .addCase(getCart.fulfilled, (state, action) => {
+        state.curUser.cart = action.payload.products;
         state.isLoading = false;
       })
       .addCase(changePassword.fulfilled, (state) => {
         state.isLoading = false;
       })
       .addMatcher(
-        (action) => action.type.endsWith("/pending"),
+        (action) =>
+          action.type.endsWith("/pending") &&
+          (action.type.startsWith("auth") || action.type.startsWith("user")),
         (state) => {
           state.isError = false;
           state.isLoading = true;

@@ -1,105 +1,114 @@
 .productdetail {
-    display: flex;
+  display: flex;
 
-    margin-bottom: 100px;
+  margin-bottom: 100px;
 
-    & .detail--thumbnail {
-        overflow: hidden;
-        width: 100%;
+  & .detail--thumbnail {
+    overflow: hidden;
+    width: 100%;
 
-        &__img {
-            transition: transform 0.5s ease;
+    &__img {
+      transition: transform 0.5s ease;
 
-            &:hover {
-                transform: scale(1.4);
-            }
-        }
+      &:hover {
+        transform: scale(1.4);
+      }
+    }
+  }
+
+  & .detail--info {
+    margin-top: 40px;
+    width: 100%;
+    padding: 0 30px;
+
+    &__name {
+      font-family: "josefin sans", sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #1d1d1d;
+      font-size: 35px;
+      line-height: 1.2em;
+      letter-spacing: 0.14rem;
+
+      -ms-word-wrap: break-word;
+      word-wrap: break-word;
     }
 
-    & .detail--info {
-        margin-top: 40px;
-        width: 100%;
-        padding: 0 30px;
-
-        &__name {
-            font-family: 'josefin sans', sans-serif;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: #1d1d1d;
-            font-size: 35px;
-            line-height: 1.2em;
-            letter-spacing: 0.14rem;
-
-            -ms-word-wrap: break-word;
-            word-wrap: break-word;
-        }
-
-        &__price {
-            margin-top: 10px;
-            font-family: 'eb garamond', serif;
-            font-size: 24px;
-            font-style: italic;
-            color: #1d1d1d;
-        }
-
-        &__description {
-            
-            font-family: 'open sans', sans-serif;
-            line-height: 1.8em;
-            color: #8b8b8b;
-        }
-
-        &__add {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            align-items: center;
-
-            &-submit {
-
-                & > a {
-                    background-color: transparent;
-                    font-family: 'EB Garamond';
-                    font-size: 18px;
-                    font-weight: 500;
-                    font-style: italic;
-                    color: inherit;
-
-                    border-color: inherit;
-                    border-radius: 5px;
-                    border: 1px solid black;
-
-                    padding: 17px 45px;
-                    height: fit-content;
-                    width: fit-content;
-
-                    &:hover {
-                        background-color: rgba(173, 173, 173, 0.295);
-                    }
-                }
-            }
-        }
-
-        &__tags {
-
-            &-label {
-                font-size: 16px;
-                font-weight: 600;
-                line-height: 15px;
-                font-family: "josefin sans", sans-serif;
-                color: #1d1d1d;
-                text-transform: uppercase;
-                letter-spacing: 0.12rem;
-            }
-
-            &-tag {
-                font-family: 'eb garamond', serif;
-                font-style: italic;
-                font-size: 18px;
-                font-weight: 400;
-                color: #8b8b8b;
-                line-height: 17px;
-            }
-        }
+    &__price {
+      margin-top: 10px;
+      font-family: "eb garamond", serif;
+      font-size: 24px;
+      font-style: italic;
+      color: #1d1d1d;
     }
+
+    &__material {
+      margin-top: 10px;
+      font-family: "eb garamond", serif;
+      font-size: 18px;
+      color: #1d1d1d;
+    }
+    &__size {
+      font-family: "eb garamond", serif;
+      font-size: 18px;
+      color: #1d1d1d;
+    }
+
+    &__description {
+      font-family: "open sans", sans-serif;
+      line-height: 1.8em;
+      color: #8b8b8b;
+    }
+
+    &__add {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+
+      &-submit {
+        & > a {
+          background-color: transparent;
+          font-family: "EB Garamond";
+          font-size: 18px;
+          font-weight: 500;
+          font-style: italic;
+          color: inherit;
+
+          border-color: inherit;
+          border-radius: 5px;
+          border: 1px solid black;
+
+          padding: 17px 45px;
+          height: fit-content;
+          width: fit-content;
+
+          &:hover {
+            background-color: rgba(173, 173, 173, 0.295);
+          }
+        }
+      }
+    }
+
+    &__tags {
+      &-label {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 15px;
+        font-family: "josefin sans", sans-serif;
+        color: #1d1d1d;
+        text-transform: uppercase;
+        letter-spacing: 0.12rem;
+      }
+
+      &-tag {
+        font-family: "eb garamond", serif;
+        font-style: italic;
+        font-size: 18px;
+        font-weight: 400;
+        color: #8b8b8b;
+        line-height: 17px;
+      }
+    }
+  }
 }

@@ -16,7 +16,9 @@ const FilterCategory = () => {
     axios
       .get(process.env.REACT_APP_BACKEND_URL + ENP_GET_ALL_CATEGORIES)
       .then((response) => {
-        setCategories(response.data.category);
+        setCategories(
+          response.data.category.sort((a, b) => a.name.localeCompare(b.name))
+        );
       });
   }, []);
 

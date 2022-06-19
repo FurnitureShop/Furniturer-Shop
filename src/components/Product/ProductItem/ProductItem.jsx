@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import "./ProductItem.scss";
@@ -27,17 +28,12 @@ const ProductItem = ({ id, name, price, imgUrl, category }) => {
         <div className="product__content__info">
           <h5 className="product__content__info-name">{name}</h5>
           <div className="product__content__info-category">
-            {/* <span>
-                            {category.map((item) => (
-                                <a href="/">{item}</a>
-                            ))}
-                        </span> */}
             {category.map((item, index) => (
               <span key={index}>
                 {index === 0 ? "" : ", "}
                 <a
                   onClick={() => {
-                    navigate(`/products/?cate=${item}`);
+                    navigate(`/products?category=${item}`);
                   }}
                 >
                   {item}
