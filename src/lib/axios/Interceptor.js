@@ -17,7 +17,6 @@ axiosInstance.interceptors.request.use(
       };
     }
     config.baseURL = process.env.REACT_APP_BACKEND_URL;
-    console.log("call token", config.baseURL);
 
     return config;
   },
@@ -32,11 +31,13 @@ axiosInstance.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    notification.success({
-      message: "Success",
-      description: response?.data?.message || "",
-      placement: "bottomLeft",
-    });
+    console.log(response.request.responseURL);
+    if (response?.data?.message)
+      notification.success({
+        message: "Success",
+        description: response?.data?.message || "",
+        placement: "bottomLeft",
+      });
     return response;
   },
   function (error) {

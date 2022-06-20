@@ -25,7 +25,7 @@ const QuantityControl = ({ value, onUpdate, disable }) => {
         className="quantity--input"
         inputMode="numeric"
         value={value}
-        defaultValue={1}
+        onChange={() => {}}
       />
 
       <span

@@ -1,31 +1,32 @@
 .shipping-address {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    gap: 30px;
+  gap: 30px;
 
-    .delivery--header,
-    .payment--header {
+  max-width: 750px;
 
-        & h3,
-        & h4 {
-            font-family: Poppins, sans-serif;
-            font-weight: 400;
-            font-size: 28px;
-            line-height: 1.235;
-        }
+  .delivery--header,
+  .payment--header {
+    & h3,
+    & h4 {
+      font-family: Poppins, sans-serif;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 1.235;
     }
+  }
 
-    .order-btn {
-        align-self: flex-end;
+  .order-btn {
+    align-self: flex-end;
 
-        &--btn {
-            height: fit-content !important;
-            font-family: 'EB Garamond';
-            font-size: 18px;
-            font-weight: 400;
-            font-style: italic;
-            border-radius: 5px;
-        }
+    &--btn {
+      height: fit-content !important;
+      font-family: "EB Garamond";
+      font-size: 18px;
+      font-weight: 400;
+      font-style: italic;
+      border-radius: 5px;
     }
+  }
 }

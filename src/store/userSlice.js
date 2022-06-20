@@ -6,9 +6,7 @@ import {
   ENP_UPDATE_USER_INFO,
 } from "api/EndPoint";
 import { axios } from "lib/axios/Interceptor";
-import { useDispatch, useSelector } from "react-redux";
 import LocalStorageService from "services/LocalStorage";
-import { getAllProduct, selectProduct } from "./productSlice";
 
 export const login = createAsyncThunk(
   "auth/login",
@@ -66,6 +64,20 @@ export const userSlice = createSlice({
       LocalStorageService.clearToken("refresh");
       state.curUser = null;
     },
+    updateCart: (state, action) => {
+      state.curUser.cart = action.payload;
+    },
+    addOrder: (state, action) => {
+      if (state.curUser) {
+        if (!state.curUser.order) {
+          state.curUser.order = [];
+        }
+        state.curUser.order.push(action.payload.newOrderSave);
+      }
+    },
+    updateOrder: (state, action) => {
+      state.curUser.cart = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -79,15 +91,16 @@ export const userSlice = createSlice({
         state.curUser = action.payload.user;
         state.isLoading = false;
       })
+      .addCase(changePassword.fulfilled, (state) => {
+        state.isLoading = false;
+      })
       .addCase(addToCart.fulfilled, (state, action) => {
-        state.curUser.cart = action.payload.userCart;
+        if (state.curUser)
+          state.curUser.cart = action.payload.userCart.products;
         state.isLoading = false;
       })
       .addCase(getCart.fulfilled, (state, action) => {
-        state.curUser.cart = action.payload.products;
-        state.isLoading = false;
-      })
-      .addCase(changePassword.fulfilled, (state) => {
+        if (state.curUser) state.curUser.cart = action.payload.products;
         state.isLoading = false;
       })
       .addMatcher(
@@ -113,6 +126,6 @@ export const selectUser = (state) => state.user.curUser;
 export const selectLoading = (state) => state.user.isLoading;
 export const selectError = (state) => state.user.isError;
 
-export const { logout } = userSlice.actions;
+export const { logout, updateCart, addOrder, updateOrder } = userSlice.actions;
 
 export default userSlice.reducer;

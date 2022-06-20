@@ -1,47 +1,70 @@
-import { Divider, Space, Typography } from 'antd'
-import React from 'react'
-import "./OrderSummary.scss"
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Divider, Space, Typography } from "antd";
+import { ENP_GET_PRODUCT_BY_LIST_ID } from "api/EndPoint";
+import { axios } from "lib/axios/Interceptor";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import "./OrderSummary.scss";
 
-const { Text, Title } = Typography
+const { Text, Title } = Typography;
 
-const data = [
-    {
-        title: "Desk Decord",
-        img: require("../../../../assets/images/shoplist5.jpg"),
-        quantity: 1,
-        price: 30,
-    },
-    {
-        title: "Desk Decord",
-        img: require("../../../../assets/images/shoplist5.jpg"),
-        quantity: 1,
-        price: 30,
+// const data = [
+//   {
+//     title: "Desk Decord",
+//     img: require("../../../../assets/images/shoplist5.jpg"),
+//     quantity: 1,
+//     price: 30,
+//   },
+//   {
+//     title: "Desk Decord",
+//     img: require("../../../../assets/images/shoplist5.jpg"),
+//     quantity: 1,
+//     price: 30,
+//   },
+// ];
+
+const OrderSummary = ({ order }) => {
+  const [productData, setProductData] = useState([]);
+
+  useEffect(() => {
+    const listID = [];
+    for (let index = 0; index < order.products.length; index++) {
+      listID.push(order.products[index].product);
     }
-]
 
-const OrderSummary = () => {
-    return (
-        <aside className='order-summary flex flex-col'>
-            <Title level={4}>Order Summary</Title>
-            <Space
-                className='flex-1'
-                direction='vertical'>
-                {data.map((item, index) => (
-                    <>
-                        <div key={index} className='products--item'>
-                            <div className='products--item--img'>
-                                <img src={item.img} alt="" />
-                            </div>
-                            <div className='products--item--info'>
-                                <Title level={5}>{item.title}</Title>
-                                <Text>{item.quantity} x {item.price.toFixed(2)}</Text>
-                            </div>
-                        </div>
-                        <Divider />
-                    </>
+    axios
+      .post(ENP_GET_PRODUCT_BY_LIST_ID, { listID: listID })
+      .then((response) => {
+        for (let index = 0; index < response.data.products.length; index++) {
+          response.data.products[index].quantity =
+            order.products[index].quantity;
+        }
+        setProductData(response.data.products);
+      });
+  }, []);
 
-                ))}
-                {/* <div className='products--item'>
+  return (
+    <aside className="order-summary flex flex-col">
+      <Title level={4}>Order Summary</Title>
+      <Space className="flex-1" direction="vertical">
+        {productData.map((item, index) => (
+          <>
+            <div key={index} className="products--item">
+              <div className="products--item--img">
+                <img src={item.image} alt="" />
+              </div>
+              <div className="products--item--info">
+                <Title level={5}>{item.name}</Title>
+                <Text>
+                  {item.quantity} x {item.price.toFixed(2)}
+                </Text>
+              </div>
+            </div>
+            <Divider />
+          </>
+        ))}
+        {/* <div className='products--item'>
                     <div className='products--item--img'>
                         <img src={data[0].img} alt="" />
                     </div>
@@ -51,31 +74,28 @@ const OrderSummary = () => {
                     </div>
                 </div>
                 <Divider /> */}
-            </Space>
+      </Space>
 
-            <Space
-                className='flex-1'
-                direction='vertical'
-                size={10}>
-                <div className='products--calc'>
-                    <Text>Subtotal</Text>
-                    <Text>${240.00}</Text>
-                </div>
-                <div className='products--calc'>
-                    <Text>Tax</Text>
-                    <Text>${0.00}</Text>
-                </div>
-                <div className='products--calc'>
-                    <Text>Shipping</Text>
-                    <Text>${0.00}</Text>
-                </div>
-                <div className='products--calc products--calc__total'>
-                    <Text>Total</Text>
-                    <Text>${240.00}</Text>
-                </div>
-            </Space>
-        </aside>
-    )
-}
+      <Space className="flex-1" direction="vertical" size={10}>
+        <div className="products--calc">
+          <Text>Subtotal</Text>
+          <Text>${order.totalPrice}</Text>
+        </div>
+        <div className="products--calc">
+          <Text>Tax</Text>
+          <Text>${0.0}</Text>
+        </div>
+        <div className="products--calc">
+          <Text>Shipping</Text>
+          <Text>${0.0}</Text>
+        </div>
+        <div className="products--calc products--calc__total">
+          <Text>Total</Text>
+          <Text>${order.totalPrice}</Text>
+        </div>
+      </Space>
+    </aside>
+  );
+};
 
-export default OrderSummary
+export default OrderSummary;

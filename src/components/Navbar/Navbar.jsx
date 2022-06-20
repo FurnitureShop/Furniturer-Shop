@@ -41,7 +41,6 @@ const Navbar = () => {
   const showDrawer = () => setDrawerState(!drawerState);
 
   const userLogin = useSelector(selectUser);
-  console.log(userLogin);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -147,6 +146,9 @@ const Navbar = () => {
                 {item.label}
               </Link>
             ))}
+            <Link key={100} to={"/order/62aff435d46feb361d9f5b15"}>
+              Order Test
+            </Link>
           </div>
         </Drawer>
       </div>

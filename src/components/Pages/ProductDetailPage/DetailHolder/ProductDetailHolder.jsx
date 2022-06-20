@@ -9,7 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProduct, selectProduct } from "store/productSlice";
-import { addToCart, selectUser } from "store/userSlice";
+import { addToCart, getCart, selectUser } from "store/userSlice";
 import { useEffect } from "react";
 
 const ProductDetailHolder = () => {
@@ -37,6 +37,7 @@ const ProductDetailHolder = () => {
         quantity: quantity,
       })
     );
+    dispatch(getCart());
   };
 
   const [quantity, setQuantity] = useState(1);

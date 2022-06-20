@@ -1,6 +1,8 @@
 import { VerticalAlignBottomOutlined } from "@ant-design/icons";
 import { Tabs } from "antd";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { logout } from "store/userSlice";
@@ -23,6 +25,17 @@ export default function User() {
     }
   };
 
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    function handleResize() {
+      setWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="mb-24">
       <div className="myaccount-container">
@@ -31,7 +44,7 @@ export default function User() {
       <div className="usertab-container pt-10">
         <Tabs
           defaultActiveKey="1"
-          tabPosition="left"
+          tabPosition={window.innerWidth > 768 ? "left" : "top"}
           onTabClick={onLogoutTabClick}
         >
           <TabPane tab="ACCOUNT DETAIL" key="1">

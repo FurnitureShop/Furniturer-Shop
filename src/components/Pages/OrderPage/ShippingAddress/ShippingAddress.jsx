@@ -1,36 +1,135 @@
 import { Button, Form, Input, Select, Typography } from "antd";
+import { ENP_ORDER } from "api/EndPoint";
 import CheckboxControl from "components/Controls/CheckboxControl/CheckboxControl";
 import FloatLabel from "components/Controls/FloatLabel/FloatLabel";
-import SelectControl from "components/Controls/SelectControl/SelectControl";
+import { axios } from "lib/axios/Interceptor";
 import React from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { selectUser } from "store/userSlice";
 import PaymentMethod from "../PaymentMethod/PaymentMethod";
 import "./ShippingAdress.scss";
 
 const { Title } = Typography;
 const { Option } = Select;
 
-const ShippingAddress = () => {
+const ShippingAddress = ({ order }) => {
+  const [form] = Form.useForm();
+  const user = useSelector(selectUser);
+
+  const onNameChangeHandler = (value) => {
+    form.setFieldsValue({ customerName: value });
+    console.log(form.getFieldValue("customerName"));
+  };
+
+  const onPhoneNumberChangeHandler = (value) => {
+    form.setFieldsValue({ phone: value });
+  };
+
+  const onAddressSelected = (value) => {
+    console.log(value);
+    form.setFieldsValue({ address: value });
+  };
+
+  const onNoteChangeHandler = (value) => {
+    form.setFieldsValue({ note: value });
+  };
+
+  const [selectedMethod, setSelectedMethod] = useState(0);
+  const handleOnChangeMethod = (value) => {
+    const paymentMethod = value === 0 ? "Cash on delivery" : "Paypal";
+    form.setFieldsValue({ paymentMethod: paymentMethod });
+    setSelectedMethod(value);
+  };
+
+  const navigate = useNavigate();
+  const onFinish = (values) => {
+    axios
+      .put(ENP_ORDER + order._id, { ...values, isPaid: true })
+      .then((response) => {
+        navigate("/");
+      });
+  };
+
   return (
-    <Form className="shipping-address">
-      <div className="delivery flex flex-col gap-y-3">
+    <Form
+      form={form}
+      initialValues={{
+        customerName: order.customerName,
+        phone: order.phone,
+        email: user.email,
+        address: order.address,
+        note: order.note,
+        paymentMethod: order.paymentMethod,
+      }}
+      className="shipping-address"
+      autoComplete="off"
+      onFinish={onFinish}
+    >
+      <div className="delivery flex flex-col">
         <div className="delivery--header">
           <Title level={4}>Delivery Information</Title>
         </div>
 
-        <FloatLabel label="Recipient's name">
-          <Input size="large" />
-        </FloatLabel>
+        <Form.Item
+          name="customerName"
+          shouldUpdate={(prevValues, curValues) =>
+            curValues &&
+            (curValues.customerName?.length === 0 ||
+              curValues.customerName?.length === 1)
+          }
+        >
+          <FloatLabel
+            label="Recipient's name"
+            value={form.getFieldValue("customerName")}
+          >
+            <Input
+              size="large"
+              defaultValue={order.customerName}
+              onChange={(e) => onNameChangeHandler(e.target.value)}
+            />
+          </FloatLabel>
+        </Form.Item>
 
         <div className="flex flex-row gap-x-3">
-          <FloatLabel customClassName="flex-1" label="Phone number">
-            <Input size="large" />
-          </FloatLabel>
-          <FloatLabel customClassName="flex-1" label="Email">
-            <Input size="large" />
-          </FloatLabel>
+          <Form.Item
+            name="phone"
+            shouldUpdate={(prevValues, curValues) =>
+              curValues &&
+              (curValues.phone?.length === 0 || curValues.phone?.length === 1)
+            }
+          >
+            <FloatLabel
+              customClassName="flex-1"
+              label="Phone number"
+              value={form.getFieldValue("phone")}
+            >
+              <Input
+                size="large"
+                defaultValue={order.phone}
+                onChange={(e) => onPhoneNumberChangeHandler(e.target.value)}
+              />
+            </FloatLabel>
+          </Form.Item>
+          <Form.Item
+            name="email"
+            shouldUpdate={(prevValues, curValues) =>
+              curValues &&
+              (curValues.email?.length === 0 || curValues.email?.length === 1)
+            }
+          >
+            <FloatLabel
+              customClassName="flex-1"
+              label="Email"
+              value={form.getFieldValue("email")}
+            >
+              <Input size="large" value={user.email} disabled />
+            </FloatLabel>
+          </Form.Item>
         </div>
 
-        <FloatLabel>
+        <Form.Item name="address">
           <Select
             size="large"
             showSearch
@@ -38,16 +137,34 @@ const ShippingAddress = () => {
             style={{
               width: "100%",
             }}
+            onSelect={onAddressSelected}
           >
-            <Option value="1">Address 1</Option>
-            <Option value="2">Address 2</Option>
-            <Option value="3">Address 3</Option>
+            {user.address.map((value) => {
+              const strAddress = `${value.landNumber}, ${value.ward}, ${value.district}, ${value.province}`;
+              return <Option value={strAddress}>{strAddress}</Option>;
+            })}
           </Select>
-        </FloatLabel>
+        </Form.Item>
 
-        <FloatLabel label="Notes">
-          <Input size="large" />
-        </FloatLabel>
+        <Form.Item
+          name="note"
+          shouldUpdate={(prevValues, curValues) =>
+            curValues &&
+            (curValues.note?.length === 0 || curValues.note?.length === 1)
+          }
+        >
+          <FloatLabel
+            customClassName="flex-1"
+            label="Notes"
+            value={form.getFieldValue("note")}
+          >
+            <Input
+              size="large"
+              defaultValue={order.note}
+              onChange={(e) => onNoteChangeHandler(e.target.value)}
+            />
+          </FloatLabel>
+        </Form.Item>
 
         <CheckboxControl
           customClassName=""
@@ -61,13 +178,21 @@ const ShippingAddress = () => {
             Payment Method
           </Title>
         </div>
-        <PaymentMethod />
+        <Form.Item name="paymentMethod">
+          <PaymentMethod
+            selectedMethod={selectedMethod}
+            handleOnChangeMethod={handleOnChangeMethod}
+            order={order}
+          />
+        </Form.Item>
       </div>
 
       <div className="order-btn">
-        <Button type="primary" className="order-btn--btn">
-          Confirm Order
-        </Button>
+        <Form.Item>
+          <Button type="primary" htmlType="submit" className="order-btn--btn">
+            Confirm Order
+          </Button>
+        </Form.Item>
       </div>
     </Form>
   );
