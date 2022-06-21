@@ -1,175 +1,183 @@
 .header {
-   background-color: #fff;
-   padding: 20px 0;
-   transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out,
-   background-color 0.3s ease;
-   z-index: 999;
+  background-color: #fff;
+  padding: 20px 0;
+  transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out,
+    background-color 0.3s ease;
+  z-index: 999;
 
-   &__sticky {
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      position: fixed;
-      top: 0;
-      width: 100%;
+  &__sticky {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
 
-      & + main.main--content {
-         margin-top: 90px;
+    & + main.main--content {
+      margin-top: 90px;
+    }
+  }
+
+  &__shrink {
+    padding: 15px 0;
+  }
+
+  &__nav {
+    & > ul > li {
+      margin: 15px;
+
+      &:first-child {
+        margin-left: 0;
       }
-   }
 
-   &__shrink {
-      padding: 15px 0;
-   }
-
-   &__nav {
-      &>ul>li {
-         margin: 15px;
-
-         &:first-child {
-            margin-left: 0;
-         }
-
-         &:last-child {
-            margin-right: 0;
-         }
-
-         &>a {
-            text-transform: capitalize;
-            padding-bottom: 3px;
-
-         }
-
+      &:last-child {
+        margin-right: 0;
       }
-   }
 
-   &__widgets-holder {
+      & > a {
+        text-transform: capitalize;
+        padding-bottom: 3px;
+      }
+    }
+  }
+
+  &__widgets-holder {
+    display: flex;
+    align-items: center;
+  }
+
+  &__widget {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &-button {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    &-content {
       display: flex;
       align-items: center;
-   }
+    }
 
-   &__widget {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
+    &-burger {
+      display: none;
 
-      &-button {
-         display: flex;
-         flex-direction: row;
-         align-items: center;
+      @media only screen and (max-width: 768px) {
+        display: flex;
       }
 
-      &-content {
-         display: flex;
-         align-items: center;
+      & svg path:nth-child(1) {
+        stroke-dashoffset: 240%;
+        stroke-dasharray: 273% 3;
       }
 
-      &-burger {
-         & svg path:nth-child(1) {
-            stroke-dashoffset: 240%;
-            stroke-dasharray: 273% 3;
-         }
-
-         & svg path:nth-child(2) {
-            stroke-dashoffset: 240%;
-            stroke-dasharray: 324% 3;
-         }
-
-         &:hover svg path:nth-child(1) {
-            -webkit-animation: header-burger-line-1-hover 0.8s cubic-bezier(0, 0, 0.34, 0.79) forwards;
-            animation: header-burger-line-1-hover 0.8s cubic-bezier(0, 0, 0.34, 0.79) forwards;
-         }
-
-         &:hover svg path:nth-child(2) {
-            -webkit-animation: header-burger-line-2-hover 0.8s cubic-bezier(0, 0, 0.34, 0.79) forwards;
-            animation: header-burger-line-2-hover 0.8s cubic-bezier(0, 0, 0.34, 0.79) forwards;
-         }
+      & svg path:nth-child(2) {
+        stroke-dashoffset: 240%;
+        stroke-dasharray: 324% 3;
       }
-   }
+
+      &:hover svg path:nth-child(1) {
+        -webkit-animation: header-burger-line-1-hover 0.8s
+          cubic-bezier(0, 0, 0.34, 0.79) forwards;
+        animation: header-burger-line-1-hover 0.8s
+          cubic-bezier(0, 0, 0.34, 0.79) forwards;
+      }
+
+      &:hover svg path:nth-child(2) {
+        -webkit-animation: header-burger-line-2-hover 0.8s
+          cubic-bezier(0, 0, 0.34, 0.79) forwards;
+        animation: header-burger-line-2-hover 0.8s
+          cubic-bezier(0, 0, 0.34, 0.79) forwards;
+      }
+    }
+  }
 }
 
 @-webkit-keyframes header-burger-line-1-hover {
-   0% {
-      stroke-dashoffset: 240%;
-   }
+  0% {
+    stroke-dashoffset: 240%;
+  }
 
-   50% {
-      stroke-dashoffset: 290%;
-   }
+  50% {
+    stroke-dashoffset: 290%;
+  }
 
-   51% {
-      stroke-dashoffset: 125%;
-   }
+  51% {
+    stroke-dashoffset: 125%;
+  }
 
-   90% {
-      stroke-dashoffset: 240%;
-   }
+  90% {
+    stroke-dashoffset: 240%;
+  }
 
-   100% {
-      stroke-dashoffset: 240%;
-   }
+  100% {
+    stroke-dashoffset: 240%;
+  }
 }
 
 @keyframes header-burger-line-1-hover {
-   0% {
-      stroke-dashoffset: 240%;
-   }
+  0% {
+    stroke-dashoffset: 240%;
+  }
 
-   50% {
-      stroke-dashoffset: 290%;
-   }
+  50% {
+    stroke-dashoffset: 290%;
+  }
 
-   51% {
-      stroke-dashoffset: 125%;
-   }
+  51% {
+    stroke-dashoffset: 125%;
+  }
 
-   90% {
-      stroke-dashoffset: 240%;
-   }
+  90% {
+    stroke-dashoffset: 240%;
+  }
 
-   100% {
-      stroke-dashoffset: 240%;
-   }
+  100% {
+    stroke-dashoffset: 240%;
+  }
 }
 
 @-webkit-keyframes header-burger-line-2-hover {
-   0% {
-      stroke-dashoffset: 240%;
-   }
+  0% {
+    stroke-dashoffset: 240%;
+  }
 
-   50% {
-      stroke-dashoffset: 200%;
-   }
+  50% {
+    stroke-dashoffset: 200%;
+  }
 
-   51% {
-      stroke-dashoffset: 320%;
-   }
+  51% {
+    stroke-dashoffset: 320%;
+  }
 
-   90% {
-      stroke-dashoffset: 240%;
-   }
+  90% {
+    stroke-dashoffset: 240%;
+  }
 
-   100% {
-      stroke-dashoffset: 240%;
-   }
+  100% {
+    stroke-dashoffset: 240%;
+  }
 }
 
 @keyframes header-burger-line-2-hover {
-   0% {
-      stroke-dashoffset: 240%;
-   }
+  0% {
+    stroke-dashoffset: 240%;
+  }
 
-   50% {
-      stroke-dashoffset: 200%;
-   }
+  50% {
+    stroke-dashoffset: 200%;
+  }
 
-   51% {
-      stroke-dashoffset: 320%;
-   }
+  51% {
+    stroke-dashoffset: 320%;
+  }
 
-   90% {
-      stroke-dashoffset: 240%;
-   }
+  90% {
+    stroke-dashoffset: 240%;
+  }
 
-   100% {
-      stroke-dashoffset: 240%;
-   }
+  100% {
+    stroke-dashoffset: 240%;
+  }
 }
