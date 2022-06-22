@@ -141,14 +141,11 @@ const Navbar = () => {
           onClose={showDrawer}
         >
           <div className="flex flex-col gap-y-2">
-            {Object.values(path).map((item, index) => (
+            {Object.values(navPath).map((item, index) => (
               <Link key={index} to={item.route}>
                 {item.label}
               </Link>
             ))}
-            <Link key={100} to={"/order/62aff435d46feb361d9f5b15"}>
-              Order Test
-            </Link>
           </div>
         </Drawer>
       </div>
