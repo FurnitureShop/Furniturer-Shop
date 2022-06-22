@@ -93,6 +93,9 @@ const CartList = () => {
       tempData[index].subtotal = updateValue * tempData[index]?.price;
 
       prevCartData.current = cartData;
+      total.current = selectedRows?.reduce((previousValue, currentValue) => {
+        return previousValue + (currentValue?.subtotal || 0);
+      }, 0);
       setCartData(tempData);
     }
   };
