@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { useRef } from "react";
+// import { useRef } from "react";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 export default function Paypal({ order }) {
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();

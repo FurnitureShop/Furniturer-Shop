@@ -4,12 +4,12 @@ import { Form } from "antd";
 import React from "react";
 import "./ProductDetailHolder.scss";
 import QuantityControl from "components/Controls/QuantityControl/QuantityControl";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProduct, selectProduct } from "store/productSlice";
-import { addToCart, getCart, selectUser } from "store/userSlice";
+import { addToCart, getCart } from "store/userSlice";
 import { useEffect } from "react";
 
 const ProductDetailHolder = () => {
@@ -47,7 +47,7 @@ const ProductDetailHolder = () => {
   };
 
   return (
-    <div className="productdetail">
+    <div className="productdetail flex flex-col md:flex-row">
       <div className="detail--thumbnail">
         <img
           className="detail--thumbnail__img"
@@ -87,7 +87,7 @@ const ProductDetailHolder = () => {
 
           <div className="detail--info__add-submit">
             <a onClick={onClickAddToCart}>
-              <span>Add to cart</span>
+              Add to cart
             </a>
           </div>
         </Form>

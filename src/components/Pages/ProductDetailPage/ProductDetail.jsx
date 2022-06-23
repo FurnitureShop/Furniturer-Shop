@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./ProductDetail.scss";
 import ProductDetailHolder from "./DetailHolder/ProductDetailHolder";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 const ProductDetail = () => {
   return (

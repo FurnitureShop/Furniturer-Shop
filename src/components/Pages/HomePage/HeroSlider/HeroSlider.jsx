@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import './HeroSlider.scss'
-import { Button } from "antd";
+// import { Button } from "antd";
 import { Carousel } from "antd";
+import { Link } from "react-router-dom";
 
 const sliderItem = [
     {
@@ -71,9 +72,9 @@ const HeroSliderItem = (props) => {
                     <h2 className="title">{props.item.title}</h2>
                     <div className="description">{props.item.description}</div>
                     <div className="readmore">
-                        <a>
+                        <Link to="/products">
                             <span>Read more</span>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="heroslider-container__item__thumbnail">

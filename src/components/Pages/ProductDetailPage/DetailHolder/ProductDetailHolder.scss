@@ -1,6 +1,4 @@
 .productdetail {
-  display: flex;
-
   margin-bottom: 100px;
 
   & .detail--thumbnail {
@@ -67,6 +65,8 @@
       align-items: center;
 
       &-submit {
+        height: fit-content;
+
         & > a {
           background-color: transparent;
           font-family: "EB Garamond";
@@ -80,13 +80,17 @@
           border: 1px solid black;
 
           padding: 17px 45px;
-          height: fit-content;
-          width: fit-content;
 
           &:hover {
             background-color: rgba(173, 173, 173, 0.295);
           }
         }
+      }
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 35px;
       }
     }
 
@@ -94,7 +98,7 @@
       &-label {
         font-size: 16px;
         font-weight: 600;
-        line-height: 15px;
+        line-height: 18px;
         font-family: "josefin sans", sans-serif;
         color: #1d1d1d;
         text-transform: uppercase;
@@ -107,7 +111,7 @@
         font-size: 18px;
         font-weight: 400;
         color: #8b8b8b;
-        line-height: 17px;
+        line-height: 18px;
       }
     }
   }
