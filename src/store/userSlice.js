@@ -84,8 +84,6 @@ export const userSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.curUser = action.payload.user;
         state.isLoading = false;
-        console.log(state.curUser);
-        console.log("FINISH");
       })
       .addCase(updateInfo.fulfilled, (state, action) => {
         state.curUser = action.payload.user;

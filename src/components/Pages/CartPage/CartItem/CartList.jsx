@@ -85,8 +85,6 @@ const CartList = () => {
   }, []);
 
   const onUpdate = (index) => (updateValue) => {
-    console.log("ON UPDATE");
-
     if (updateValue > 0 && updateValue <= cartData[index]?.inStock) {
       const tempData = [...cartData];
       tempData[index].quantity = updateValue;
@@ -102,7 +100,6 @@ const CartList = () => {
 
   useEffect(() => {
     if (cartData && prevCartData.current?.length !== 0) {
-      console.log("UPDATE CART");
       const formatCart = formatProductCart(cartData);
       axios.put(ENP_CART, { products: formatCart }).then(() => {
         dispatch(updateCart(formatCart));
@@ -112,7 +109,6 @@ const CartList = () => {
 
   const onRemove = (index) => {
     const tempData = [...cartData];
-    console.log("DELETE DATA");
 
     tempData.splice(index, 1);
 

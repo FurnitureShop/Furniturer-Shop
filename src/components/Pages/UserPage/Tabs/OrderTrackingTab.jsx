@@ -36,7 +36,6 @@ export default function OrderTrackingTab() {
 
   const navigate = useNavigate();
   const onClickNavigatePaymentMethod = (id) => {
-    console.log(id);
     navigate("/order/" + id);
   };
 

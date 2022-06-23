@@ -4,8 +4,6 @@ import ProductItem from "./ProductItem/ProductItem";
 //import { Row, Col } from 'antd';
 
 const ProductList = ({ products, ...props }) => {
-  //   console.log(cate);
-
   return (
     <div
       className={`productlist grid grid-cols-1 

@@ -20,7 +20,6 @@ const ShippingAddress = ({ order }) => {
 
   const onNameChangeHandler = (value) => {
     form.setFieldsValue({ customerName: value });
-    console.log(form.getFieldValue("customerName"));
   };
 
   const onPhoneNumberChangeHandler = (value) => {
@@ -28,7 +27,6 @@ const ShippingAddress = ({ order }) => {
   };
 
   const onAddressSelected = (value) => {
-    console.log(value);
     form.setFieldsValue({ address: value });
   };
 
