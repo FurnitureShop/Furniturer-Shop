@@ -37,9 +37,11 @@ const PaymentMethod = ({ selectedMethod, handleOnChangeMethod, order }) => {
           </Radio>
         </div>
       </Radio.Group>
-      <div style={{ maxWidth: "750px", minHeight: "200px", marginTop: 20 }}>
-        {selectedMethod === 1 ? <Paypal order={order} /> : null}
-      </div>
+      {selectedMethod === 1 ? (
+        <div style={{ maxWidth: "750px", minHeight: "200px", marginTop: 20 }}>
+          <Paypal order={order} />
+        </div>
+      ) : null}
     </Form>
   );
 };
