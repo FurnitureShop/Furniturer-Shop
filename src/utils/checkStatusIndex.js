@@ -8,7 +8,7 @@ export default function checkStatusIndex(status) {
     case "Cancelled":
     case "Processing":
       return 2;
-    case "Deliverd":
+    case "Delivered":
       return 3;
     default:
       return 0;
