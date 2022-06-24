@@ -1,33 +1,32 @@
 .myaccount {
-    &-container {
-        $container-height: 50vh;
-        background-image: url("../../../../assets/images/my_account.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: -2vw;
-        width: 100%;
-        height: $container-height;
+  &-container {
+    $container-height: 50vh;
+    background-image: url("../../../../assets/images/my_account.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: -2vw;
+    width: 100%;
+    height: $container-height;
 
-        h1 {
-            color: #fff;
-            font: 700 36px "Josefin Sans";
-            text-align: center;
-            line-height: $container-height;
-            letter-spacing: 0.1em;
-        }
+    h1 {
+      color: #fff;
+      font: 700 36px "Josefin Sans";
+      text-align: center;
+      line-height: $container-height;
+      letter-spacing: 0.1em;
     }
+  }
 }
 
 .usertab {
-
-    &-container {
-        justify-content: center;
-        font: 14px "Poppins""Sans-serif";
-        margin: auto;
-        width: 86%;
-    }
+  &-container {
+    justify-content: center;
+    font: 14px "Times New Roman" "Sans-serif";
+    margin: auto;
+    width: 86%;
+  }
 }
 
 .ant-tabs-tab {
-    justify-content: center;
+  justify-content: center;
 }
