@@ -232,7 +232,7 @@ const CartList = () => {
 
       <div className={`cart--confirm ${hasSelected > 0 ? "" : "invisible"}`}>
         <Text>
-          {1} {"item(s) selected"}
+          {selectedRows.length} {"item(s) selected"}
         </Text>
         <div className="cart--confirm--btn">
           <Title style={{ fontWeight: "500", marginBottom: 0 }} level={4}>
