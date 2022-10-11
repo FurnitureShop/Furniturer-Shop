@@ -14,33 +14,6 @@ import { createOrder } from "utils/createOrder";
 import { formatProductCart } from "utils/formatProductCart";
 import "./CartList.scss";
 
-// let dummyData = [
-//   {
-//     key: "1",
-//     img: require("../../../../assets/images/shoplist5.jpg"),
-//     name: "hello",
-//     price: 30,
-//     quantity: 1,
-//     subtotal: 30,
-//   },
-//   {
-//     key: "2",
-//     img: require("../../../../assets/images/shoplist5.jpg"),
-//     name: "hello",
-//     price: 30,
-//     quantity: 1,
-//     subtotal: 30,
-//   },
-//   {
-//     key: "3",
-//     img: require("../../../../assets/images/shoplist5.jpg"),
-//     name: "hello",
-//     price: 30,
-//     quantity: 1,
-//     subtotal: 30,
-//   },
-// ];
-
 const { Column } = Table;
 const { Text, Title } = Typography;
 

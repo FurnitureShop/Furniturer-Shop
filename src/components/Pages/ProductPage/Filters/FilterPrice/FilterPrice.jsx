@@ -8,7 +8,7 @@ import "./FilterPrice.scss";
 const FilterPrice = () => {
   const [value, setValue] = useState([]);
   const query = useQuery();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
 
   const onAfterChange = (value) => {
     setValue(value);

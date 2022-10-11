@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 
 const FilterSearch = () => {
   const query = useQuery();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
 
   const onChange = (value) => {
     let _filters = { ...query, name: value };
