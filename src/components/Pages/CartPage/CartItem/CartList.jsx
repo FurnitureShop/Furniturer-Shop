@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Table, Typography } from "antd";
+import { Button, notification, Table, Typography } from 'antd';
 import { ENP_CART, ENP_GET_PRODUCT_BY_LIST_ID, ENP_ORDER } from "api/EndPoint";
 import QuantityControl from "components/Controls/QuantityControl/QuantityControl";
 import { axios } from "lib/axios/Interceptor";
@@ -99,6 +99,17 @@ const CartList = () => {
   const navigate = useNavigate();
   const onCheckout = () => {
     const formatProduct = formatProductCart(selectedRows);
+
+    if (user.name === '' || user.phone === '') {
+      notification.error({
+        message: 'Error',
+        description: 'Please input name and phone to checkout',
+        placement: 'bottomLeft',
+      });
+      navigate('/user');
+      return;
+    }
+
     const order = createOrder(user, formatProduct, total.current);
 
     let intersection = cartData.filter(

@@ -9,21 +9,6 @@ import "./OrderSummary.scss";
 
 const { Text, Title } = Typography;
 
-// const data = [
-//   {
-//     title: "Desk Decord",
-//     img: require("../../../../assets/images/shoplist5.jpg"),
-//     quantity: 1,
-//     price: 30,
-//   },
-//   {
-//     title: "Desk Decord",
-//     img: require("../../../../assets/images/shoplist5.jpg"),
-//     quantity: 1,
-//     price: 30,
-//   },
-// ];
-
 const OrderSummary = ({ order }) => {
   const [productData, setProductData] = useState([]);
 
