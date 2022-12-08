@@ -25,6 +25,12 @@ function App() {
     >
       <BrowserRouter>
         <RoutePaths />
+        <df-messenger
+          intent="WELCOME"
+          chat-title="Đây_là_1_con_bot"
+          agent-id="9917ee40-d9df-4117-8e97-b1affcc6a5cf"
+          language-code="en"
+        ></df-messenger>
       </BrowserRouter>
     </PayPalScriptProvider>
   );
