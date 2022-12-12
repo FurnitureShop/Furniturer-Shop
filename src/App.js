@@ -6,6 +6,7 @@ import RoutePaths from "./Paths/Routes";
 import "./App.scss";
 import LocalStorageService from "services/LocalStorage";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { IMAGES } from "./assets/images";
 
 function App() {
 	useEffect(() => {
@@ -28,7 +29,7 @@ function App() {
 				<df-messenger
 					intent="WELCOME"
 					chat-title="Furniturer shop"
-					chat-icon="%PUBLIC_URL%/logo192.png"
+					chat-icon={IMAGES.logo}
 					agent-id="9917ee40-d9df-4117-8e97-b1affcc6a5cf"
 					language-code="en"
 				></df-messenger>
