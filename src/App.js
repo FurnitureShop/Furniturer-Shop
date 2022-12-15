@@ -5,7 +5,7 @@ import RoutePaths from "./Paths/Routes";
 //import MainLayout from 'components/MainLayout';
 import "./App.scss";
 import LocalStorageService from "services/LocalStorage";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { IMAGES } from "./assets/images";
 
 function App() {
@@ -15,6 +15,18 @@ function App() {
 			LocalStorageService.clearToken("refresh");
 		};
 	});
+
+	useEffect(() => {
+		const dfMessenger = document.querySelector('df-messenger');
+
+		dfMessenger.addEventListener("df-response-received", (res) => {
+			console.log(res);
+			setTimeout(() => {
+				dfMessenger.renderCustomText("hello from js")
+			}, 1000)
+		})
+	}, [])
+
 	return (
 		<PayPalScriptProvider
 			options={{
