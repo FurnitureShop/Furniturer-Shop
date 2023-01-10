@@ -5,7 +5,7 @@ import RoutePaths from "./Paths/Routes";
 //import MainLayout from 'components/MainLayout';
 import "./App.scss";
 import LocalStorageService from "services/LocalStorage";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { IMAGES } from "./assets/images";
 import chatbotHandler from "utils/chatbotHandler";
 
