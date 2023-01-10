@@ -23,3 +23,6 @@ export const BASE_API_LOCATION_VN_URL = "https://vapi.vnappmob.com/api/";
 export const ENP_PROVINCE = "province/";
 export const ENP_DISTRICT = "province/district/";
 export const ENP_WARD = "province/ward/";
+
+export const ENP_TOP_PRODUCT = (pageSize, limit) =>
+	`top?pageSize=${pageSize}&limit=${limit}`;

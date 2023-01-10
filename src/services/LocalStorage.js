@@ -8,7 +8,7 @@ const LocalStorageService = (() => {
   }
   function _setToken(name, value, expiresInSecond = FIFFEN_MINUTES_INSECOND) {
     document.cookie =
-      name + "=" + value + "; " + "max-age=" + expiresInSecond + "; path=/";
+      name + "=" + value + "; max-age=" + expiresInSecond + "; path=/";
   }
   function setRefreshToken(value) {
     _setToken("refresh", value);

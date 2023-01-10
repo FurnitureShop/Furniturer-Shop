@@ -7,6 +7,7 @@ import "./App.scss";
 import LocalStorageService from "services/LocalStorage";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { IMAGES } from "./assets/images";
+import chatbotHandler from "utils/chatbotHandler";
 
 function App() {
 	useEffect(() => {
@@ -15,6 +16,17 @@ function App() {
 			LocalStorageService.clearToken("refresh");
 		};
 	});
+
+	useEffect(() => {
+		const dfMessenger = document.querySelector("df-messenger");
+		dfMessenger.addEventListener("df-request-sent", function (event) {
+			// console.log(event);
+		});
+		dfMessenger.addEventListener("df-response-received", function (event) {
+			chatbotHandler(event, dfMessenger);
+		});
+	}, []);
+
 	return (
 		<PayPalScriptProvider
 			options={{
