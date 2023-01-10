@@ -38,10 +38,10 @@ const advisoryHandler = (chatbotResponse, dfMessenger) => {
 						},
 						text: "Add to cart",
 						event: {
-							name: "e",
+							name: "addtocart",
 							languageCode: "en-us",
 							parameters: {
-								name: products[index.name],
+								name: products[index].name,
 							},
 						},
 					},
