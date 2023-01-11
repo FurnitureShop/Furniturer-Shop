@@ -8,6 +8,8 @@ import LocalStorageService from "services/LocalStorage";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { IMAGES } from "./assets/images";
 import chatbotHandler from "utils/chatbotHandler";
+import { useDispatch } from "react-redux";
+import { assignChatbot } from "store/chatbotSlice";
 
 function App() {
 	useEffect(() => {
@@ -17,15 +19,15 @@ function App() {
 		};
 	});
 
+	const dispatch = useDispatch()
+
 	useEffect(() => {
 		const dfMessenger = document.querySelector("df-messenger");
-		dfMessenger.addEventListener("df-request-sent", function (event) {
-			// console.log(event);
-		});
+		dispatch(assignChatbot(dfMessenger));
 		dfMessenger.addEventListener("df-response-received", function (event) {
-			chatbotHandler(event, dfMessenger);
+			chatbotHandler(event);
 		});
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<PayPalScriptProvider

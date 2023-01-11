@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 
-import { StorageContext } from "./ProductTable";
 
 export const columnsProduct = [
   {
@@ -10,7 +9,7 @@ export const columnsProduct = [
     render: (info) => {
       return (
         <div className="flex info__product">
-          <img src={info.imageUrl} className="w-20 h-20" />
+          <img src={info.imageUrl} alt="Product info" className="w-20 h-20" />
           <div>
             <p className="font-semibold">{info.name}</p>
             <p>{info.color}</p>

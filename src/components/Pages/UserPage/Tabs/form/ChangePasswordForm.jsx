@@ -12,11 +12,11 @@ export default function ChangePasswordForm() {
     const prevLoadingStatus = useRef();
 
     useEffect(() => {
-        if (prevLoadingStatus.current == true) {
+        if (prevLoadingStatus.current === true) {
             if (!isError) form.resetFields();
         }
         else prevLoadingStatus.current = isLoading;
-    }, [isLoading])
+    }, [isLoading, form, isError])
 
     const onOldPasswordChangeHandler = (value) => {
         form.setFieldsValue({ oldPassword: value })
