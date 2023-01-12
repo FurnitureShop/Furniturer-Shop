@@ -1,109 +1,53 @@
-import { ENP_TOP_PRODUCT } from "api/EndPoint";
-import { axios } from "lib/axios/Interceptor";
+import { store } from "../store";
 import {
-	repAfterDisplayProduct,
-	repBeforeDisplayProduct,
-} from "./chatbotResponses";
-import { generateNum } from "./mathUtils";
-import {store} from '../store'
+	addProductToCart,
+	fetchMoreProduct,
+	fetchProductFirstTime,
+} from "store/chatbotSlice";
 
 
 
-export default function chatbotHandleMessage(event) {
-	const chatbot = store.getState().chatbot.chatbot;
+export default function chatbotHandleMessage(event, {navigate}) {
+	const handlerMapping = {
+		iAdvisory: iAdvisoryHandler,
+		// eslint-disable-next-line
+		["iAdvisory - yes"]: iAdvisoryFetchMoreHandler,
+		iNavigateProduct: iNavigateProductHandler,
+		iCart: iCartHandler,
+	};
 	const chatbotResponse = event?.detail?.response?.queryResult;
-	switch (chatbotResponse?.intent?.displayName) {
-		case "iAdvisory":
-			iAdvisoryHandler(chatbotResponse, chatbot);
-			break;
-		default:
+	if (
+		typeof handlerMapping[chatbotResponse?.intent?.displayName] === "function"
+	) {
+		handlerMapping[chatbotResponse?.intent?.displayName](chatbotResponse, {navigate});
 	}
 }
 
-const iAdvisoryHandler = (chatbotResponse, dfMessenger) => {
+const iAdvisoryHandler = (chatbotResponse) => {
 	const parameters = chatbotResponse.parameters;
 	if (parameters.top !== "" && parameters.top.length !== 0) {
-		getTopProductHandler(parameters.top).then((response) => {
-			dfMessenger.renderCustomText(
-				repBeforeDisplayProduct[generateNum(0, 2)](``)
-			);
-			const products = response.data.product;
-			setTimeout(() => {
-				for (let index = 0; index < products?.length; index++) {
-					dfMessenger.renderCustomCard([
-						{
-							type: "image",
-							rawUrl: products[index].image[0],
-							accessibilityText: products[index].name,
-						},
-						{
-							type: "info",
-							title: products[index].name,
-							subtitle: products[index].category.join(", "),
-							actionLink: console.log("hello"),
-						},
-						{
-							type: "button",
-							icon: {
-								type: "chevron_right",
-								color: "#FF9800",
-							},
-							text: "Add to cart",
-							event: {
-								name: "addtocart",
-								languageCode: "en-us",
-								parameters: {
-									name: products[index].name,
-								},
-							},
-						},
-					]);
-				}
-				dfMessenger.renderCustomText(repAfterDisplayProduct[generateNum(0, 2)]);
-			}, 1000);
-		});
+		store.dispatch(fetchProductFirstTime(parameters.top));
 	} else {
-		getTopProductHandler().then((response) => {
-			const products = response.data.product;
-			for (let index = 0; index < products?.length; index++) {
-				dfMessenger.renderCustomCard([
-					{
-						type: "image",
-						rawUrl: products[index].image[0],
-						accessibilityText: products[index].name,
-					},
-					{
-						type: "info",
-						title: products[index].name,
-						subtitle: products[index].category.join(", "),
-						actionLink: console.log("hello"),
-					},
-					{
-						type: "button",
-						icon: {
-							type: "chevron_right",
-							color: "#FF9800",
-						},
-						text: "Add to cart",
-						event: {
-							name: "addtocart",
-							languageCode: "en-us",
-							parameters: {
-								name: products[index].name,
-							},
-						},
-					},
-				]);
-			}
-		});
+		store.dispatch(fetchProductFirstTime());
 	}
 };
 
-const getTopProductHandler = (conditionParams) => {
-	return axios.post(ENP_TOP_PRODUCT(3, 1), [...conditionParams]);
+const iAdvisoryFetchMoreHandler = (chatbotResponse) => {
+	const parameters = chatbotResponse.parameters;
+	if (parameters.top !== "" && parameters.top.length !== 0) {
+		store.dispatch(fetchMoreProduct(parameters.top));
+	} else {
+		store.dispatch(fetchMoreProduct());
+	}
 };
 
-const addToCartHandle = (name, dfMessenger) => {
-	console.log("HELLO");
-	dfMessenger.renderCustomText(`Add ${name} to cart success`);
+const iNavigateProductHandler = (chatbotResponse, {navigate}) => {
+	const id = chatbotResponse.fulfillmentMessages[1].payload?.id;
+	navigate("products/" + id);
+};
+const iCartHandler = (chatbotResponse) => {
+	const id = chatbotResponse.fulfillmentMessages[1].payload?.id;
+	console.log("CALL API");
+	store.dispatch(addProductToCart(id));
+	console.log(store.getState().chatbot.cart);
 };

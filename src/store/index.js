@@ -9,4 +9,7 @@ export const store = configureStore({
     product: productReducer,
     chatbot: chatbotReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false
+  })
 });

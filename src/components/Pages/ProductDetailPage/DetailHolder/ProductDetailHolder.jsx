@@ -17,17 +17,16 @@ const ProductDetailHolder = () => {
   const dispatch = useDispatch();
 
   const products = useSelector(selectProduct);
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState();
 
   useEffect(() => {
     if (!products || products.length === 0) {
       const fetchData = async () => {
         await dispatch(getAllProduct());
-        setProduct(products.find((product) => product["_id"] === id));
       };
       fetchData();
     } else setProduct(products.find((product) => product["_id"] === id));
-  }, []);
+  }, [products]);
 
   const navigate = useNavigate();
   const onClickAddToCart = () => {
@@ -39,7 +38,6 @@ const ProductDetailHolder = () => {
     );
     dispatch(getCart());
   };
-
   const [quantity, setQuantity] = useState(1);
 
   const updateQuantity = (quantity) => {

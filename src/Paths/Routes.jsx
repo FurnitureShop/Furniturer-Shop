@@ -1,5 +1,5 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import path from "./Path";
 
 import Home from "../components/Pages/HomePage/Home";
@@ -13,8 +13,24 @@ import Cart from "components/Pages/CartPage/Cart";
 import Order from "components/Pages/OrderPage/Order";
 import LoginTab from "components/Pages/AuthPage/Login/LoginTab";
 import RegisterTab from "components/Pages/AuthPage/Register/RegisterTab";
+import { useDispatch } from "react-redux";
+import { assignChatbot } from "store/chatbotSlice";
+import chatbotHandleMessage from "utils/chatbotHandler";
 
 const RoutePaths = () => {
+  const navigate = useNavigate()
+	const dispatch = useDispatch()
+	useEffect(() => {
+		const dfMessenger = document.querySelector("df-messenger");
+		dispatch(assignChatbot(dfMessenger));
+		dfMessenger.addEventListener("df-response-received", function (event) {
+			chatbotHandleMessage(event, {navigate});
+		});
+		dfMessenger.addEventListener("df-info-card-clicked", function (event) {
+			console.log(event)
+		})
+	}, [dispatch, navigate]);
+
   return (
     <Routes>
       <Route
