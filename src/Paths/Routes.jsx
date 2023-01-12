@@ -13,23 +13,23 @@ import Cart from "components/Pages/CartPage/Cart";
 import Order from "components/Pages/OrderPage/Order";
 import LoginTab from "components/Pages/AuthPage/Login/LoginTab";
 import RegisterTab from "components/Pages/AuthPage/Register/RegisterTab";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { assignChatbot } from "store/chatbotSlice";
 import chatbotHandleMessage from "utils/chatbotHandler";
 
 const RoutePaths = () => {
   const navigate = useNavigate()
 	const dispatch = useDispatch()
+  const dfMessengerStore = useSelector((state) => state.chatbot.chatbot)
 	useEffect(() => {
+    if(dfMessengerStore) return;
 		const dfMessenger = document.querySelector("df-messenger");
 		dispatch(assignChatbot(dfMessenger));
 		dfMessenger.addEventListener("df-response-received", function (event) {
 			chatbotHandleMessage(event, {navigate});
 		});
-		dfMessenger.addEventListener("df-info-card-clicked", function (event) {
-			console.log(event)
-		})
-	}, [dispatch, navigate]);
+    // eslint-disable-next-line
+	}, []);
 
   return (
     <Routes>

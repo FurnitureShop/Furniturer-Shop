@@ -27,3 +27,9 @@ export const repBeforeFetchMore = [
     "I'd just picked some nice products for you, take a look!",
     "Found some products that may suit your taste."
 ]
+
+export const createOrderSuccess = [
+    "Congrats! Your order is now being processed by our shop owner",
+    "Awesome! Your order will be processed soon",
+    "Thank you for buying our furniture",
+]

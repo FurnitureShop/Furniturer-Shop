@@ -26,3 +26,5 @@ export const ENP_WARD = "province/ward/";
 
 export const ENP_TOP_PRODUCT = (pageSize, limit) =>
 	`top?pageSize=${pageSize}&limit=${limit}`;
+
+export const ENP_CREATE_ORDER_CHATBOT = "order/chatbot-order"
