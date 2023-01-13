@@ -1,4 +1,4 @@
-import { Button, Form, Input, Select, Typography } from "antd";
+import { AutoComplete, Button, Form, Input, Select, Typography } from "antd";
 import { ENP_ORDER } from "api/EndPoint";
 import CheckboxControl from "components/Controls/CheckboxControl/CheckboxControl";
 import FloatLabel from "components/Controls/FloatLabel/FloatLabel";
@@ -27,6 +27,10 @@ const ShippingAddress = ({ order }) => {
   };
 
   const onAddressSelected = (value) => {
+    form.setFieldsValue({ address: value });
+  };
+
+  const onAddressChange = (value) => {
     form.setFieldsValue({ address: value });
   };
 
@@ -128,20 +132,19 @@ const ShippingAddress = ({ order }) => {
         </div>
 
         <Form.Item name="address">
-          <Select
+          <AutoComplete
             size="large"
-            showSearch
+            options={user.address.map((value) => {
+              const strAddress = `${value.landNumber}, ${value.ward}, ${value.district}, ${value.province}`;
+              return {label: strAddress, value: strAddress}
+            })}
             placeholder="Select an address"
             style={{
               width: "100%",
             }}
             onSelect={onAddressSelected}
-          >
-            {user.address.map((value) => {
-              const strAddress = `${value.landNumber}, ${value.ward}, ${value.district}, ${value.province}`;
-              return <Option value={strAddress}>{strAddress}</Option>;
-            })}
-          </Select>
+            onChange={onAddressChange}
+          />
         </Form.Item>
 
         <Form.Item
