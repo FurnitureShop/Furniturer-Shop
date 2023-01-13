@@ -29,6 +29,7 @@ export const fetchMoreProduct = createAsyncThunk(
 	"chatbot/fetchMore",
 	async (conditionParams, { dispatch, getState }) => {
 		const { pagination, lastFetchParams } = getState()?.chatbot;
+		console.log(pagination)
 		if (lastFetchParams) {
 			dispatch(chatbotSlice.actions.updatePageIndex(pagination.page + 1));
 			const response = await axios.post(
@@ -112,7 +113,7 @@ export const chatbotSlice = createSlice({
 			state.chatbot = action.payload;
 		},
 		saveFetchParams: (state, action) => {
-			state.lastFetch = action.payload;
+			state.lastFetchParams = action.payload;
 		},
 		updatePageIndex: (state, action) => {
 			state.pagination.page = action.payload;

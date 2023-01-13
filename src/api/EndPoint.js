@@ -24,7 +24,7 @@ export const ENP_PROVINCE = "province/";
 export const ENP_DISTRICT = "province/district/";
 export const ENP_WARD = "province/ward/";
 
-export const ENP_TOP_PRODUCT = (pageSize, limit) =>
-	`top?pageSize=${pageSize}&limit=${limit}`;
+export const ENP_TOP_PRODUCT = (pageSize, page) =>
+	`top?pageSize=${pageSize}&page=${page}`;
 
 export const ENP_CREATE_ORDER_CHATBOT = "order/chatbot-order"
