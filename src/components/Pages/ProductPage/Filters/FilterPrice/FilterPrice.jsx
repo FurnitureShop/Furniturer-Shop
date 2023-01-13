@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import "./FilterPrice.scss";
 
 const FilterPrice = () => {
-  const [value, setValue] = useState([]);
+  const [value, setValue] = useState([0, 200]);
   const query = useQuery();
   const [, setSearchParams] = useSearchParams();
 
