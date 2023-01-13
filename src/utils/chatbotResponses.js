@@ -19,7 +19,7 @@ export const repAfterDisplayProduct = [
 export const reAskAboutFurniture = [
     "What kind of furniture that you are looking for?",
     "What type of furniture that you are going to buy?",
-    "•	What furniture you are interested in?"
+    "What furniture you are interested in?"
 ]
 
 export const repBeforeFetchMore = [
