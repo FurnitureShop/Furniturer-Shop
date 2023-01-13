@@ -3,7 +3,7 @@
   padding: 20px 0;
   transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out,
     background-color 0.3s ease;
-  z-index: 999;
+  z-index: 99;
 
   &__sticky {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -11,7 +11,7 @@
     top: 0;
     width: 100%;
 
-    & + main.main--content {
+    &+main.main--content {
       margin-top: 90px;
     }
   }
@@ -21,7 +21,7 @@
   }
 
   &__nav {
-    & > ul > li {
+    &>ul>li {
       margin: 15px;
 
       &:first-child {
@@ -32,7 +32,7 @@
         margin-right: 0;
       }
 
-      & > a {
+      &>a {
         text-transform: capitalize;
         padding-bottom: 3px;
       }
@@ -78,17 +78,13 @@
       }
 
       &:hover svg path:nth-child(1) {
-        -webkit-animation: header-burger-line-1-hover 0.8s
-          cubic-bezier(0, 0, 0.34, 0.79) forwards;
-        animation: header-burger-line-1-hover 0.8s
-          cubic-bezier(0, 0, 0.34, 0.79) forwards;
+        -webkit-animation: header-burger-line-1-hover 0.8s cubic-bezier(0, 0, 0.34, 0.79) forwards;
+        animation: header-burger-line-1-hover 0.8s cubic-bezier(0, 0, 0.34, 0.79) forwards;
       }
 
       &:hover svg path:nth-child(2) {
-        -webkit-animation: header-burger-line-2-hover 0.8s
-          cubic-bezier(0, 0, 0.34, 0.79) forwards;
-        animation: header-burger-line-2-hover 0.8s
-          cubic-bezier(0, 0, 0.34, 0.79) forwards;
+        -webkit-animation: header-burger-line-2-hover 0.8s cubic-bezier(0, 0, 0.34, 0.79) forwards;
+        animation: header-burger-line-2-hover 0.8s cubic-bezier(0, 0, 0.34, 0.79) forwards;
       }
     }
   }
