@@ -146,7 +146,6 @@ export const chatbotSlice = createSlice({
 		builder
 			.addCase(fetchProductFirstTime.fulfilled, (state, action) => {
 				const chatbot = state.chatbot;
-				chatbot.renderCustomText(repBeforeDisplayProduct[generateNum(0, 2)]);
 				const products = action.payload.product;
 				setTimeout(() => {
 					if (products.length === 0) {
@@ -156,6 +155,7 @@ export const chatbotSlice = createSlice({
 						chatbot.renderCustomText(reAskAboutFurniture[generateNum(0, 2)]);
 					} else {
 						for (let index = 0; index < products?.length; index++) {
+							chatbot.renderCustomText(repBeforeDisplayProduct[generateNum(0, 2)]);
 							chatbot.renderCustomCard([
 								{
 									type: "image",
@@ -227,13 +227,13 @@ export const chatbotSlice = createSlice({
 			})
 			.addCase(fetchMoreProduct.fulfilled, (state, action) => {
 				const chatbot = state.chatbot;
-				chatbot.renderCustomText(repBeforeFetchMore[generateNum(0, 2)]);
 				const products = action.payload.product;
 				setTimeout(() => {
 					if (products.length === 0) {
 						chatbot.renderCustomText("Sorry, we just reach out of the list");
 						chatbot.renderCustomText(reAskAboutFurniture[generateNum(0, 2)]);
 					} else {
+						chatbot.renderCustomText(repBeforeFetchMore[generateNum(0, 2)]);
 						for (let index = 0; index < products?.length; index++) {
 							chatbot.renderCustomCard([
 								{
