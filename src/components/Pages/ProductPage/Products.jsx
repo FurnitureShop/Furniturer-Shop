@@ -27,8 +27,12 @@ const Products = () => {
   const queryParam = useQuery();
 
   useEffect(() => {
+    dispatch(getAllProduct());
+  },[])
+
+  useEffect(() => {
     if (!products || products.length === 0) {
-      dispatch(getAllProduct());
+      // dispatch(getAllProduct());
     } else {
       filterProduct();
     }
@@ -74,6 +78,8 @@ const Products = () => {
   };
 
   const filterMinMaxPrice = (filterArray, minPrice, maxPrice) => {
+    console.log(products)
+    console.log(filterArray)
     return filterArray.filter((currentValue) => {
       return currentValue.price > minPrice && currentValue.price < maxPrice;
     });
